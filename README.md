@@ -1,7 +1,7 @@
+# Het selectie canvas
+[Selectie canvas](https://paulomoekotte.github.io/Indicatoren/SelectieCanvas.html)
 # Indicatoren
-
-# Hyperlinks
-
-[Indicatoren selectie canvas](https://paulomoekotte.github.io/Indicatoren/ModelSelecieCanvas.html)
+[Indicatoren selectie canvas](https://paulomoekotte.github.io/Indicatoren/ModelSelectieCanvas.html)
+# Selectie
 [Team indicatoren](https://paulomoekotte.github.io/Indicatoren/teamindicatoren.html)
 
