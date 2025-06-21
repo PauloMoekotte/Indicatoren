@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: Het Pad naar Impactvolle Schoolindicatoren</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            border-left: 5px solid;
+        }
+        .flowchart-step {
+            position: relative;
+            padding: 1rem 1.5rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            text-align: center;
+            width: 90%;
+            margin: 0 auto;
+        }
+        .flowchart-arrow {
+            font-size: 2rem;
+            color: #4A5568; 
+            line-height: 1;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-[#003B46] text-white p-8 text-center">
+        <h1 class="text-4xl md:text-5xl font-black tracking-tight">Het Pad naar Impactvolle Schoolindicatoren</h1>
+        <p class="mt-4 max-w-3xl mx-auto text-lg text-[#C4DFE6]">Een visuele gids voor schoolteams om data-gedreven beslissingen te nemen, geïnspireerd door het School Team Indicator Selectie Canvas.</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <section id="context" class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-2 text-[#07575B]">1. De Basis: Context & Doelen</h2>
+            <p class="text-center max-w-3xl mx-auto mb-8">Voordat we kunnen meten, moeten we begrijpen 'waarom' en voor 'wie'. Het definiëren van de missie, stakeholders en het kernprobleem vormt het fundament voor elke zinvolle indicator.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="kpi-card border-[#07575B]">
+                    <h3 class="font-bold text-xl mb-2">Team Missie</h3>
+                    <p class="text-gray-600">Wat is het overkoepelende doel?</p>
+                    <p class="text-3xl font-extrabold text-[#07575B] mt-4">🎯</p>
+                </div>
+                <div class="kpi-card border-[#66A5AD]">
+                    <h3 class="font-bold text-xl mb-2">Stakeholders</h3>
+                    <p class="text-gray-600">Voor wie doen we het?</p>
+                     <p class="text-3xl font-extrabold text-[#66A5AD] mt-4">👥</p>
+                </div>
+                <div class="kpi-card border-[#07575B]">
+                    <h3 class="font-bold text-xl mb-2">Kernprobleem</h3>
+                    <p class="text-gray-600">Welke uitdaging pakken we aan?</p>
+                     <p class="text-3xl font-extrabold text-[#07575B] mt-4">🧩</p>
+                </div>
+                <div class="kpi-card border-[#66A5AD]">
+                    <h3 class="font-bold text-xl mb-2">Gewenste Resultaten</h3>
+                    <p class="text-gray-600">Wat is succes?</p>
+                     <p class="text-3xl font-extrabold text-[#66A5AD] mt-4">🏆</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="mb-12">
+             <h2 class="text-3xl font-bold text-center mb-2 text-[#07575B]">2. Inventarisatie: Wat We Hebben & Doen</h2>
+            <p class="text-center max-w-3xl mx-auto mb-8">Effectieve indicatoren zijn geworteld in de realiteit. Een analyse van de huidige activiteiten, processen en beschikbare middelen is cruciaal om haalbare en relevante meetpunten te kiezen.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-center mb-4">Analyse van Teamcapaciteiten</h3>
+                    <p class="text-center text-gray-600 mb-4">Deze grafiek vergelijkt de sterke punten van een team met de potentiële hiaten. Dit helpt om te focussen op indicatoren die gebruik maken van sterktes of die juist de zwaktes aanpakken.</p>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="teamCapabilitiesChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-center mb-4">Verdeling van Kernactiviteiten</h3>
+                    <p class="text-center text-gray-600 mb-4">Deze donut-grafiek toont de verhouding tussen de verschillende kernactiviteiten van het team. Het helpt te visualiseren waar de meeste tijd en moeite naartoe gaat en waar indicatoren het meest relevant zijn.</p>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="coreActivitiesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="process" class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-2 text-[#07575B]">3. Het Hart van de Zaak: Indicatoren Selecteren</h2>
+            <p class="text-center max-w-3xl mx-auto mb-8">Dit is het kernproces. Het kiezen van de juiste indicatoren vereist een zorgvuldige afweging. We onderscheiden twee hoofdtypes: Educatief en Management. Beide zijn essentieel voor een holistisch beeld van de teamprestaties.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
+                    <h3 class="text-2xl font-bold mb-4">Typen Indicatoren</h3>
+                    <p class="text-gray-600 text-center mb-2"><strong>Educatief:</strong> Direct gerelateerd aan onderwijs, leren en leerlingresultaten.</p>
+                    <p class="text-gray-600 text-center"><strong>Management:</strong> Gerelateerd aan efficiëntie, processen en operationele effectiviteit.</p>
+                    <div class="w-full max-w-xs mx-auto mt-4">
+                        <canvas id="indicatorTypesChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-center mb-4">Het Selectieproces: Van Idee tot Benchmark</h3>
+                    <p class="text-center text-gray-600 mb-6">Het selecteren van een indicator is meer dan een keuze; het is een proces. Deze stroom visualiseert de stappen die nodig zijn om een robuuste en zinvolle indicator te definiëren.</p>
+                    <div class="flex flex-col items-center space-y-2">
+                        <div class="flowchart-step border-l-4 border-[#07575B]"><strong>Naam & Type</strong><p class="text-sm text-gray-500">Benoem en classificeer de indicator</p></div>
+                        <div class="flowchart-arrow">↓</div>
+                        <div class="flowchart-step border-l-4 border-[#66A5AD]"><strong>Definitie & Rationeel</strong><p class="text-sm text-gray-500">Wat meet het en waarom is het belangrijk?</p></div>
+                        <div class="flowchart-arrow">↓</div>
+                        <div class="flowchart-step border-l-4 border-[#07575B]"><strong>Data & Methode</strong><p class="text-sm text-gray-500">Waar komt de data vandaan en hoe verzamelen we het?</p></div>
+                         <div class="flowchart-arrow">↓</div>
+                        <div class="flowchart-step border-l-4 border-[#66A5AD]"><strong>Frequentie & Verantwoordelijke</strong><p class="text-sm text-gray-500">Hoe vaak meten we en wie doet het?</p></div>
+                        <div class="flowchart-arrow">↓</div>
+                        <div class="flowchart-step border-l-4 border-[#07575B]"><strong>Doel & Benchmark</strong><p class="text-sm text-gray-500">Wat is het streefcijfer?</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="challenges" class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-2 text-[#07575B]">4. Vooruitkijken: Uitdagingen & Mitigatie</h2>
+            <p class="text-center max-w-3xl mx-auto mb-8">Het implementeren van indicatoren is niet zonder obstakels. Door proactief na te denken over potentiële uitdagingen en ethische overwegingen, kan een team de kans op succes aanzienlijk vergroten.</p>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-2xl font-bold text-center mb-4">Impact van Potentiële Uitdagingen</h3>
+                 <p class="text-center text-gray-600 mb-4">Deze grafiek toont de potentiële impact van verschillende uitdagingen op het succesvol implementeren van indicatoren. 'Tijdsdruk' en 'Gebrek aan training' worden vaak als de grootste risico's gezien.</p>
+                <div class="chart-container h-96">
+                    <canvas id="challengesImpactChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#003B46] text-white p-6 text-center">
+        <p>Deze infographic is een visuele interpretatie van het School Team Indicator Selectie Canvas.</p>
+        <p class="text-sm mt-2 text-[#C4DFE6]">Gemaakt om data-gedreven cultuur in het onderwijs te bevorderen.</p>
+    </footer>
+
+    <script>
+        const wrapText = (text, maxLen) => {
+            if (typeof text !== 'string' || text.length <= maxLen) {
+                return text;
+            }
+            const words = text.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).length > maxLen && currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    if (currentLine.length > 0) {
+                        currentLine += ' ' + word;
+                    } else {
+                        currentLine = word;
+                    }
+                }
+            });
+            lines.push(currentLine);
+            return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#4A5568',
+                        font: {
+                            family: "'Inter', sans-serif"
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    titleFont: {
+                        family: "'Inter', sans-serif"
+                    },
+                    bodyFont: {
+                        family: "'Inter', sans-serif"
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    ticks: { color: '#4A5568', font: { family: "'Inter', sans-serif" } },
+                    grid: { color: '#E2E8F0' }
+                },
+                x: {
+                    ticks: { color: '#4A5568', font: { family: "'Inter', sans-serif" } },
+                    grid: { display: false }
+                }
+            }
+        };
+
+        const colors = {
+            primary: '#07575B',
+            secondary: '#66A5AD',
+            accent: '#C4DFE6',
+            dark: '#003B46',
+            lightGray: '#f0f4f8'
+        };
+
+        new Chart(document.getElementById('teamCapabilitiesChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Samenwerking', 'Vakexpertise', 'Data-analyse', 'Technologie', wrapText('Oudercommunicatie', 16)],
+                datasets: [{
+                    label: 'Team Sterktes',
+                    data: [8, 9, 5, 7, 6],
+                    backgroundColor: colors.primary,
+                    borderColor: colors.primary,
+                    borderWidth: 1
+                }, {
+                    label: 'Potentiële Hiaten',
+                    data: [2, 1, 5, 3, 4],
+                    backgroundColor: colors.secondary,
+                    borderColor: colors.secondary,
+                    borderWidth: 1
+                }]
+            },
+            options: { ...commonChartOptions }
+        });
+
+        new Chart(document.getElementById('coreActivitiesChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Curriculum Ontwikkeling', 'Data Analyse', 'Collegiale Observatie', 'Ouder Workshops'],
+                datasets: [{
+                    label: 'Tijdsbesteding',
+                    data: [40, 25, 20, 15],
+                    backgroundColor: [colors.primary, colors.secondary, colors.dark, '#8ac0c9'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#4A5568',
+                            font: { family: "'Inter', sans-serif" }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        },
+                         titleFont: {
+                            family: "'Inter', sans-serif"
+                        },
+                        bodyFont: {
+                            family: "'Inter', sans-serif"
+                        }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('indicatorTypesChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Educatief', 'Management'],
+                datasets: [{
+                    data: [65, 35],
+                    backgroundColor: [colors.primary, colors.secondary],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                         labels: {
+                            color: '#4A5568',
+                            font: { family: "'Inter', sans-serif" }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        },
+                        titleFont: {
+                            family: "'Inter', sans-serif"
+                        },
+                        bodyFont: {
+                            family: "'Inter', sans-serif"
+                        }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('challengesImpactChart'), {
+            type: 'radar',
+            data: {
+                labels: ['Tijdsdruk', 'Gebrek aan training', wrapText('Weerstand personeel', 16), 'Privacyzorgen', 'Beperkte middelen'],
+                datasets: [{
+                    label: 'Impact Score (1-10)',
+                    data: [9, 8, 6, 7, 8],
+                    fill: true,
+                    backgroundColor: 'rgba(102, 165, 173, 0.4)',
+                    borderColor: colors.secondary,
+                    pointBackgroundColor: colors.secondary,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: colors.secondary
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                     legend: {
+                        position: 'bottom',
+                         labels: {
+                            color: '#4A5568',
+                            font: { family: "'Inter', sans-serif" }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        },
+                        titleFont: {
+                            family: "'Inter', sans-serif"
+                        },
+                        bodyFont: {
+                            family: "'Inter', sans-serif"
+                        }
+                    }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: '#E2E8F0' },
+                        grid: { color: '#E2E8F0' },
+                        pointLabels: { 
+                            font: { size: 12, family: "'Inter', sans-serif" },
+                            color: '#4A5568'
+                         },
+                        ticks: {
+                            color: '#4A5568',
+                            backdropColor: 'rgba(255, 255, 255, 0.75)',
+                            font: { family: "'Inter', sans-serif" }
+                        },
+                        min: 0,
+                        max: 10
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
