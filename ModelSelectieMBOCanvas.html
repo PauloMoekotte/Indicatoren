@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: MBO Onderwijsteam Indicator Selectie Canvas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .canvas-container {
+            width: 100%;
+            max-width: 1200px; 
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            display: grid;
+            grid-template-columns: repeat(1, 1fr); 
+            gap: 0.5rem;
+            padding: 1rem;
+        }
+        @media (min-width: 768px) { 
+            .canvas-container {
+                grid-template-columns: repeat(5, 1fr); 
+                grid-template-rows: repeat(2, minmax(180px, 1fr)); 
+                gap: 0.75rem;
+                padding: 1.5rem;
+            }
+        }
+        @media (min-width: 1024px) { 
+            .canvas-container {
+                gap: 1rem;
+                padding: 2rem;
+            }
+        }
+
+        .canvas-block {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0; 
+            border-radius: 0.5rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #2D3748; 
+            font-size: 0.875rem;
+        }
+        .canvas-block h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #07575B; 
+        }
+        .canvas-block ul {
+            list-style: disc;
+            margin-left: 1.25rem;
+            padding-left: 0;
+        }
+        .canvas-block li {
+            margin-bottom: 0.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .block-1 { grid-column: 1 / 2; grid-row: 2 / 3; }
+            .block-2 { grid-column: 1 / 2; grid-row: 3 / 4; }
+            .block-3 { grid-column: 2 / 3; grid-row: 2 / 4; }
+            .block-4 { grid-column: 3 / 4; grid-row: 2 / 4; }
+            .block-5 { grid-column: 4 / 5; grid-row: 2 / 3; }
+            .block-6 { grid-column: 4 / 5; grid-row: 3 / 4; }
+            .block-7 { grid-column: 5 / 6; grid-row: 2 / 3; }
+            .block-8 { grid-column: 5 / 6; grid-row: 3 / 4; }
+        }
+         .title-block {
+            grid-column: 1 / -1; 
+            grid-row: 1; 
+            background-color: #003B46; 
+            color: #C4DFE6; 
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .title-block h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+        .title-block p {
+            font-size: 1rem;
+        }
+        @media (min-width: 768px) {
+            .title-block {
+                grid-column: 1 / 6; 
+                grid-row: auto; 
+                margin-bottom: 0; 
+                padding: 1rem 1.5rem;
+            }
+             .canvas-container {
+                grid-template-rows: auto repeat(2, minmax(180px, 1fr)); 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="canvas-container">
+        <div class="title-block">
+            <h1>MBO Onderwijsteam Indicator Selectie Canvas</h1>
+            <p>Sturen op Impact in het Beroepsonderwijs</p>
+        </div>
+
+        <div class="canvas-block block-1">
+            <h3>Team Missie & Visie</h3>
+            <p class="text-gray-600 mb-2">Waarom bestaat het team? Langetermijnambities gericht op arbeidsmarkt en ontwikkeling.</p>
+            <ul>
+                <li>Overkoepelend doel van de opleiding</li>
+                <li>Toekomstbeeld van de student en sector</li>
+                <li>Bijdrage aan de arbeidsmarkt/maatschappij</li>
+            </ul>
+        </div>
+
+        <div class="canvas-block block-3">
+            <h3>Kernactiviteiten van het Team</h3>
+            <p class="text-gray-600 mb-2">Wat doet het team primair? Belangrijkste taken en initiatieven die leiden tot beroepscompetenties.</p>
+            <ul>
+                <li>Praktijkonderwijs ontwikkelen en aanbieden</li>
+                <li>Stagebegeleiding & -evaluatie</li>
+                <li>Projectmatig werken</li>
+                <li>Samenwerking met leerbedrijven</li>
+            </ul>
+        </div>
+
+        <div class="canvas-block block-4 bg-[#07575B] text-white">
+            <h3 class="text-white">IMPACT: De Kern van Indicatoren</h3>
+            <p class="text-gray-100 mb-2">Het centraal stellen van impact. Dit is het hart van waarom we meten: om zinvolle veranderingen te realiseren die de student en sector ten goede komen.</p>
+            <ul>
+                <li><strong>Waarom deze indicator belangrijk is:</strong> Directe verbinding met beroepscompetenties en missie.</li>
+                <li><strong>Anticiperende Impact:</strong> Specifieke, gewenste veranderingen op:
+                    <ul class="list-none ml-0 mt-1">
+                        <li>- Inzetbaarheid studenten</li>
+                        <li>- Vakbekwaamheid & praktijkvaardigheden</li>
+                        <li>- Arbeidsmarkt aansluiting (startkwalificatie)</li>
+                        <li>- Doorstroom naar vervolgonderwijs</li>
+                        <li>- Tevredenheid leerbedrijven</li>
+                    </ul>
+                </li>
+                <li>Meetbare resultaten (Onderwijskwaliteit & Management)</li>
+                <li>Duidelijke definities van succes in MBO-context</li>
+            </ul>
+        </div>
+
+        <div class="canvas-block block-5">
+            <h3>Stakeholders & Communicatie</h3>
+            <p class="text-gray-600 mb-2">Wie zijn betrokken en hoe communiceren we? Relaties met de buitenwereld die leiden tot impact voor studenten.</p>
+            <ul>
+                <li>Studenten, docenten, studieloopbaanbegeleiders</li>
+                <li>Leerbedrijven, brancheorganisaties</li>
+                <li>Ouders (indien van toepassing), ROC-directie</li>
+            </ul>
+        </div>
+
+        <div class="canvas-block block-7">
+            <h3>Kernprobleem & Gewenste Resultaten</h3>
+            <p class="text-gray-600 mb-2">De specifieke uitdaging en de concrete, meetbare doelen die de gewenste impact definiëren voor de MBO-praktijk.</p>
+            <ul>
+                <li>Tekort aan gekwalificeerd personeel in sector X</li>
+                <li>Lage studentretentie in opleidingsjaar Y</li>
+                <li>Behoefte aan nieuwe vaardigheden (bijv. digitalisering)</li>
+                <li>Verhogen van het slagingspercentage of doorstroomcijfer</li>
+            </ul>
+        </div>
+
+        <div class="canvas-block block-2">
+            <h3>Hulpmiddelen & Capaciteiten</h3>
+            <p class="text-gray-600 mb-2">Wat heeft het team nodig en wat zijn de sterke punten die impact mogelijk maken in het MBO?</p>
+            <ul>
+                <li>Praktijkruimtes, gespecialiseerde apparatuur</li>
+                <li>Gespecialiseerde docenten met werkervaring</li>
+                <li>Netwerk van leerbedrijven</li>
+                <li>Budgets voor leermiddelen/innovatie</li>
+            </ul>
+        </div>
+
+        <div class="canvas-block block-6">
+            <h3>Datagebruik & Analyse Methoden</h3>
+            <p class="text-gray-600 mb-2">Hoe wordt data verzameld, geanalyseerd en gebruikt om impact te meten en te vergroten?</p>
+            <ul>
+                <li>Stage-evaluaties & feedback leerbedrijven</li>
+                <li>Voortgangsgesprekken met studenten</li>
+                <li>Examenresultaten, diplomeringcijfers</li>
+                <li>Studenttevredenheidsonderzoeken</li>
+                <li>Arbeidsmarktinformatie</li>
+            </ul>
+        </div>
+
+        <div class="canvas-block block-8">
+            <h3>Uitdagingen & Risico's</h3>
+            <p class="text-gray-600 mb-2">Potentiële obstakels en hoe deze te verminderen om de gewenste impact te garanderen in een dynamische MBO-omgeving.</p>
+            <ul>
+                <li>Snel veranderende arbeidsmarktbehoeften</li>
+                <li>Behoud van studentmotivatie</li>
+                <li>Voldoende en kwalitatieve stageplaatsen</li>
+                <li>Financieringsbeperkingen & personeelsbezetting</li>
+                <li>Ethische overwegingen (data privacy, gelijke kansen)</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
