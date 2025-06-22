@@ -80,7 +80,10 @@ De kerndistincties tussen onderwijskundige en managementcontexten strekken zich 
  * Aard van "Impact": Onderwijskundige impact wordt vaak gekenmerkt door zijn kwalitatieve, langetermijn en diffuse aard, waardoor het moeilijk te isoleren is vanwege talrijke verstorende variabelen. Het omvat brede "maatschappelijke impact" en de langetermijnbijdragen van "oud-studenten" aan de beroepspraktijk. Managementimpact, hoewel ook complex, heeft vaak directere en gemakkelijker kwantificeerbare verbanden met financiële resultaten (bijv. EBITDA, Total Shareholder Returns) en operationele efficiëntie. De discussie over sociale impactmeting benadrukt verder gebieden die "het moeilijkst te vertalen zijn naar kwantitatieve meetgegevens," zoals psychosociaal welzijn , wat nauwer aansluit bij de kwalitatieve en mensgerichte resultaten die in onderwijs- en sociale initiatieven worden nagestreefd.
 6. Vergelijkende Analyse: Divergerende Benaderingen en Gedeelde Uitdagingen
 Een directe vergelijking van indicatortypen, meetmethodologieën en typische meetgegevens die in onderwijs en management worden gebruikt, onthult zowel verschillende benaderingen als gemeenschappelijke uitdagingen.
-Directe Vergelijking van Indicatortypen, Meetmethodologieën en Typische Meetgegevens
+
+##Directe Vergelijking van Indicatortypen, Meetmethodologieën en Typische Meetgegevens
+
+Tabel 1: Typologie en Voorbeelden van Onderwijskundige versus Managementindicatoren (MBO-context)
 
 | Indicatortype         | Onderwijskundige Indicatoren (MBO-voorbeelden)                                               | Management-/Organisatie-indicatoren (Algemene voorbeelden)                       |
 |-----------------------|---------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
