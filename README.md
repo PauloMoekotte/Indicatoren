@@ -2,6 +2,10 @@
 [Selectie canvas](https://paulomoekotte.github.io/Indicatoren/SelectieViaCanvas.html)
 # Indicatoren
 [Indicatoren selectie canvas](https://paulomoekotte.github.io/Indicatoren/ModelSelectieCanvas.html)
+
+
+[Indicatoren selectie MBO canvas](https://paulomoekotte.github.io/Indicatoren/ModelSelectieMBOCanvas.html)
+
 # Selectie
 [Team indicatoren](https://paulomoekotte.github.io/Indicatoren/teamindicatoren.html)
 
