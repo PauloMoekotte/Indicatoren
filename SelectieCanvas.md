@@ -81,19 +81,18 @@ De kerndistincties tussen onderwijskundige en managementcontexten strekken zich 
 6. Vergelijkende Analyse: Divergerende Benaderingen en Gedeelde Uitdagingen
 Een directe vergelijking van indicatortypen, meetmethodologieën en typische meetgegevens die in onderwijs en management worden gebruikt, onthult zowel verschillende benaderingen als gemeenschappelijke uitdagingen.
 Directe Vergelijking van Indicatortypen, Meetmethodologieën en Typische Meetgegevens
-Tabel 1: Typologie en Voorbeelden van Onderwijskundige versus Managementindicatoren (MBO-context)
-| Indicatortype | Onderwijskundige Indicatoren (MBO-voorbeelden) | Management-/Organisatie-indicatoren (Algemene voorbeelden) |
-|---|---|---|
-| Input | Financiering per student , Student/docent ratio , Kwalificaties docenten (incl. praktijkervaring) , Praktijkruimtes en leermiddelen  | (Vaak geïntegreerd in operationele/financiële KPI's) |
-| Proces | Onderwijsmethoden (bijv. projectonderwijs, praktijkleren) , Academisch management , Uren professionalisering docenten , Curriculumontwerp  | Productietijd , Bezettingsgraden van middelen , Productiviteit  |
-| Output | Diplomeringpercentages , Toetsresultaten (incl. praktijkexamens) , Arbeidsmarktkansen na afstuderen , Ontwikkelde leermiddelen/innovatieprojecten  | Omzet , Netto-inkomen , ROI , EBITDA , Total Shareholder Returns (TSR)  |
-| Outcome | Maatschappelijke impact , Bijdragen van oud-studenten aan beroepspraktijk , Hogere arbeidsproductiviteit , Verbeterde individuele capaciteiten  | (Vaak weerspiegeld in langetermijn financiële/marktprestaties) |
-| Toegang | Geografische afstand tot school , Familie/culturele achtergrond , Directe particuliere kosten (bijv. leermiddelen)  | (Geen directe managementcategorie; kan deel uitmaken van markttoegang) |
-| Gelijkheid | Toegang tot effectief praktijkonderwijs , Rigoureuze leerroutes , Schoolklimaat  | (Kan deel uitmaken van HR/organisatorische gezondheid, bijv. inclusiviteit ) |
-| Studentgericht | Gemiddeld cijfer/studieresultaten , Deelname aan buitenschoolse activiteiten/projecten  | (Niet direct van toepassing; individuele prestatiemetingen bestaan) |
-| HR/Personeel | Ziekteverzuimpercentages docenten , Tevredenheidsonderzoeken personeel  | Personeelsbehoud , Medewerkerstevredenheid , Talentmobiliteit  |
-| Klant/Stakeholder | Betrokkenheid van ouders/verzorgers , Partnerschappen met bedrijven  | Net Promoter Score (NPS) , Klachtenpercentage , Reactietijd service  |
-| Organisatorische Gezondheid | (Impliciet in schoolklimaat, welzijn)  | Strategische duidelijkheid , Rolhelderheid , Persoonlijke verantwoordelijkheid , Besluitvaardig leiderschap , Wendbaarheid , Veerkracht , Inclusiviteit  |
+| Indicatortype         | Onderwijskundige Indicatoren (MBO-voorbeelden)                                               | Management-/Organisatie-indicatoren (Algemene voorbeelden)                       |
+|-----------------------|---------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| Input                 | Financiering per student, Student/docent ratio, Kwalificaties docenten, Praktijkruimtes     | (Vaak geïntegreerd in operationele/financiële KPI's)                            |
+| Proces                | Onderwijsmethoden, Academisch management, Uren professionalisering docenten, Curriculumontwerp | Productietijd, Bezettingsgraden van middelen, Procesoptimalisatie              |
+| Output                | Diplomeringpercentages, Toetsresultaten, Arbeidsmarktkansen na afstuderen, Innovatieprojecten| Omzet, Netto-inkomen, ROI, EBITDA                                               |
+| Outcome               | Maatschappelijke impact, Bijdragen oud-studenten, Hogere arbeidsproductiviteit, Capaciteiten | (Vaak weerspiegeld in langetermijn financiële en strategische indicatoren)      |
+| Toegang               | Geografische afstand tot school, Familie/culturele achtergrond, Kosten leermiddelen         | (Geen directe managementcategorie; kan deel uitmaken van markttoegankelijkheid) |
+| Gelijkheid            | Toegang tot effectief praktijkonderwijs, Schoolklimaat                                      | (Kan deel uitmaken van HR/organisatorische gezondheid, bijv. inclusiviteit)     |
+| Studentgericht        | Gemiddeld cijfer, Deelname aan buitenschoolse activiteiten/projecten                        | (Niet direct van toepassing; individuele prestatiemetingen bestaan)             |
+| HR/Personeel          | Ziekteverzuimpercentages docenten, Tevredenheidsonderzoeken personeel                       | Personeelsbehoud, Medewerkerstevredenheid, Talentmobiliteit                    |
+| Klant/Stakeholder     | Betrokkenheid van ouders/verzorgers, Partnerschappen met bedrijven                          | Net Promoter Score (NPS), Klachtenpercentage, Reactietijd service              |
+| Organisatorische Gezondheid | (Impliciet in schoolklimaat, welzijn)                                                 | Strategische duidelijkheid, Rolhelderheid, Persoonlijke verantwoordelijkheid, Besluitvaardig leiderschap, Wendbaarheid |
 Bespreking van de Uitdagingen bij het Toepassen van Meetgegevens in Verschillende Domeinen
 Ondanks hun verschillende focus, ondervinden zowel het onderwijs- als het managementdomein gemeenschappelijke obstakels bij impactmeting, naast uitdagingen die uniek zijn voor elk vakgebied.
 Tabel 2: Belangrijkste Uitdagingen bij Impactmeting in Verschillende Domeinen
