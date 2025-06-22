@@ -12,3 +12,8 @@
 # Selectie
 [Team indicatoren](https://paulomoekotte.github.io/Indicatoren/teamindicatoren.html)
 
+# Effectief datagebruik
+
+[Effectief datagebruik](https://paulomoekotte.github.io/Indicatoren/EffectiefDatagebruik.html)
+
+
