@@ -220,10 +220,10 @@
         .tab-button {
             background-color: #ddd;
             border: none;
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             cursor: pointer;
             transition: background-color 0.3s;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-family: 'Montserrat', sans-serif;
             margin: 5px;
         }
@@ -310,6 +310,11 @@
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         }
+        /* NIEUWE AANPASSING: Titel Data-assistent */
+        .chat-header h3 {
+            color: var(--kleur-geel);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
         .chat-messages {
             flex-grow: 1;
             padding: 1rem;
@@ -321,6 +326,7 @@
             padding: 0.5rem 1rem;
             border-radius: 15px;
             max-width: 80%;
+            line-height: 1.4;
         }
         .message.user {
             background-color: var(--kleur-blauw-licht);
@@ -428,6 +434,8 @@
         <div class="tabs">
             <button class="tab-button active" data-tab="casus1">Casus 1: Startersresultaat</button>
             <button class="tab-button" data-tab="casus2">Casus 2: Jaarresultaat</button>
+            <!-- NIEUWE AANPASSING: Tabknop voor Casus 3 -->
+            <button class="tab-button" data-tab="casus3">Casus 3: JOB-monitor</button>
         </div>
 
         <div id="casus1" class="tab-content active">
@@ -454,6 +462,19 @@
             <button class="accordion-btn">Heeft het toelatingsrecht invloed op het Jaarresultaat?</button>
             <div class="accordion-panel"><p>Ja, dit kan invloed hebben, met name op niveau 2. Goede registratie van de intake en nader onderzoek zijn hierbij essentieel om de effecten te begrijpen.</p></div>
         </div>
+        
+        <!-- NIEUWE AANPASSING: Content voor Casus 3 -->
+        <div id="casus3" class="tab-content">
+            <h3>Casus 3: Verbeteren op basis van de JOB-monitor</h3>
+            <p>De JOB-monitor (Jongeren Organisatie Beroepsonderwijs) is een landelijke enquête die de tevredenheid van mbo-studenten meet over hun opleiding, de begeleiding, de stage en meer.</p>
+
+            <button class="accordion-btn">Onze scores zijn laag op 'begeleiding'. Wat nu?</button>
+            <div class="accordion-panel"><p>Een lage score is een signaal. Volg het stappenplan: 1. Organiseer een teamgesprek om dit te duiden. 2. Verzamel méér data: ga in gesprek met studenten (studentenpanels), analyseer verslagen van studieloopbaanbegeleiders. 3. Formuleer een hypothese ('We vermoeden dat studenten de begeleiding als onvoldoende ervaren omdat de contactmomenten te onregelmatig zijn'). 4. Bedenk een gerichte interventie en evalueer deze.</p></div>
+            
+            <button class="accordion-btn">Hoe verbinden we de JOB-monitor aan ons teamplan?</button>
+            <div class="accordion-panel"><p>Gebruik de resultaten om concrete en SMART-doelen op te stellen in je team- of verbeterplan. Bijvoorbeeld: "In het komende schooljaar willen we de tevredenheidsscore op het thema 'stagebegeleiding' verhogen van een 6,2 naar een 7,0 door maandelijks een vast contactmoment in te plannen tussen de SLB'er en de student op stage."</p></div>
+        </div>
+
     </section>
 
     <!-- Modals (Pop-up content) -->
@@ -489,7 +510,7 @@
                 <div class="sample-questions">
                     <small>Probeer bijvoorbeeld:</small><br>
                     <button>Wat is het stappenplan?</button>
-                    <button>Wat is het verschil tussen Jaarresultaat en Startersresultaat?</button>
+                    <button>Wat is de JOB-monitor?</button>
                     <button>Hoe organiseer ik een goed teamgesprek?</button>
                 </div>
             </div>
@@ -563,11 +584,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- AI Response Database (Simulatie) ---
+    // NIEUWE AANPASSING: AI antwoorden voor casus 3 toegevoegd
     const aiResponses = {
-        'default': "Dat begrijp ik niet helemaal. Kun je de vraag anders formuleren? Ik kan je helpen met vragen over het stappenplan, de casussen (jaarresultaat, startersresultaat) en de uitgangspunten.",
+        'default': "Dat begrijp ik niet helemaal. Kun je de vraag anders formuleren? Ik kan je helpen met vragen over het stappenplan, de casussen (jaarresultaat, startersresultaat, JOB-monitor) en de uitgangspunten.",
         'stappenplan': "Het stappenplan bestaat uit 7 stappen: 1. Bepaal aanleiding, 2. Organiseer teamgesprek, 3. Verzamel gegevens, 4. Genereer interpretaties, 5. Bepaal interventies, 6. Implementeer, 7. Evalueer. <small>Klik op de stappen in de infographic voor meer details!</small>",
         'jaarresultaat': "Het Jaarresultaat is het percentage gediplomeerde studenten ten opzichte van alle uitstromers (met en zonder diploma). Het geeft aan hoe succesvol een opleiding is in het begeleiden van studenten naar een diploma of het behouden van hen in de opleiding.",
         'startersresultaat': "Het Startersresultaat is het aandeel nieuwe instromers dat na één jaar nog studeert of een diploma heeft behaald. Het is een belangrijke indicator voor het voorkomen van eerstejaarsuitval.",
+        'job|monitor|tevredenheid': "De JOB-monitor is een landelijke enquête die de tevredenheid van mbo-studenten meet. Het is een waardevolle bron van kwalitatieve data om te achterhalen wat studenten van hun opleiding vinden. Gebruik lage scores als startpunt voor een diepere analyse, niet als eindconclusie.",
         'verschil': "Het <strong>Startersresultaat</strong> kijkt specifiek naar het succes van *nieuwe* studenten in hun eerste jaar. Het <strong>Jaarresultaat</strong> kijkt naar *alle* studenten in een bepaald jaar en hun succes (diploma of doorstroom), ongeacht hoe lang ze al studeren.",
         'teamgesprek': "Een goed teamgesprek organiseer je door: 1. Duidelijk het doel te bepalen (wat willen we weten/bereiken?). 2. Te focussen op factoren die het team kan beïnvloeden. 3. Zowel kwantitatieve als kwalitatieve data mee te nemen in het gesprek. 4. Samen hypotheses op te stellen.",
         'cimo': "CIMO staat voor Context, Interventie, Mechanismen, Outcomes. Het is een denkkader om problemen gestructureerd aan te pakken. De gedachte is: 'Voor dit probleem in deze <strong>Context</strong> is deze <strong>Interventie</strong> nuttig, die via deze <strong>Mechanismen</strong> leidt tot de gewenste <strong>Outcomes</strong>'.",
