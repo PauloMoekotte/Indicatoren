@@ -2,7 +2,7 @@
 [Selectie canvas](https://paulomoekotte.github.io/Indicatoren/SelectieViaCanvas.html)
 
 # Betekenisvolle Impact
-[Betekenisvolle impact](https://paulomoekotte.github.io/Indicatoren/BetekenisvolleImpact.html}
+[Betekenisvolle impact](https://paulomoekotte.github.io/Indicatoren/BetekenisvolleImpact.html)
 
 # Indicatoren
 [Indicatoren selectie canvas](https://paulomoekotte.github.io/Indicatoren/ModelSelectieCanvas.html)
