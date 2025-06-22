@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactieve Infographic: Efficiënt Datagebruik</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Algemene Stijlen & Kleurvariabelen --- */
+        :root {
+            --kleur-geel: #ffc107;
+            --kleur-blauw-licht: #6cace4;
+            --kleur-blauw-donker: #3a5f8a;
+            --kleur-groen: #6c7a1e;
+            --kleur-oranje: #d9534f;
+            --kleur-bruin: #8b4513;
+            --kleur-tekst: #333;
+            --kleur-achtergrond: #f9f9f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            color: var(--kleur-tekst);
+            background-color: #fff;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1rem;
+        }
+        
+        h1 { font-size: 2.8rem; color: var(--kleur-blauw-donker); }
+        h2 { font-size: 2rem; color: var(--kleur-blauw-donker); border-bottom: 3px solid var(--kleur-geel); padding-bottom: 0.5rem; display: inline-block; }
+        h3 { font-size: 1.4rem; color: var(--kleur-groen); }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* --- Header --- */
+        .header {
+            background-color: var(--kleur-geel);
+            color: var(--kleur-blauw-donker);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header .header-title {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header .intro-text {
+            max-width: 700px;
+            margin: 1rem auto;
+            font-size: 1.1rem;
+        }
+
+        /* --- Uitgangspunten Sectie (Cirkels) --- */
+        .cirkel-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .cirkel {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 1rem;
+        }
+        .cirkel:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .cirkel-1 { background-color: var(--kleur-blauw-donker); }
+        .cirkel-2 { background-color: var(--kleur-oranje); }
+        .cirkel-3 { background-color: var(--kleur-groen); }
+        .cirkel-4 { background-color: var(--kleur-blauw-licht); }
+        .cirkel-5 { background-color: var(--kleur-bruin); }
+        .cirkel-6 { background-color: var(--kleur-blauw-donker); }
+        .cirkel-7 { background-color: var(--kleur-groen); }
+
+        /* --- Modal (Pop-up) Stijlen --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            position: relative;
+            text-align: left;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* --- Stappenplan (Tijdlijn) --- */
+        .section-light {
+             background-color: var(--kleur-achtergrond);
+        }
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--kleur-geel);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            cursor: pointer;
+        }
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -13px;
+            background-color: white;
+            border: 4px solid var(--kleur-blauw-donker);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            transition: background-color 0.3s;
+        }
+        .timeline-item:hover::after {
+            background-color: var(--kleur-geel);
+        }
+        .timeline-item.right::after { left: -12px; }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .timeline-item:hover .timeline-content {
+            transform: scale(1.02);
+        }
+        .timeline-item.left .timeline-content { text-align: right; }
+        
+        /* --- Casussen (Tabs) --- */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .tab-button {
+            background-color: #ddd;
+            border: none;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', sans-serif;
+            margin: 5px;
+        }
+        .tab-button:hover { background-color: #ccc; }
+        .tab-button.active { background-color: var(--kleur-blauw-donker); color: white; }
+        
+        .tab-content {
+            display: none;
+            text-align: left;
+            animation: fadeIn 0.5s;
+        }
+        .tab-content.active { display: block; }
+        .tab-content h3 { margin-top: 1.5rem; }
+
+        /* --- Accordion (FAQ) --- */
+        .accordion-btn {
+            background-color: var(--kleur-groen);
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1rem;
+            transition: 0.4s;
+            margin-top: 1rem;
+            font-family: 'Lato', sans-serif;
+            font-weight: bold;
+        }
+        .accordion-btn:hover, .accordion-btn.active { background-color: #5a6618; }
+        .accordion-panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            border: 1px solid #ddd;
+        }
+        .accordion-panel p { padding: 1rem 0; }
+
+        /* --- AI Assistent Stijlen --- */
+        #chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--kleur-blauw-donker);
+            color: white;
+            border-radius: 50%;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #chat-widget {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 350px;
+            max-width: 90vw;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 998;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+        #chat-widget.open {
+            transform: scale(1);
+        }
+        .chat-header {
+            background-color: var(--kleur-blauw-donker);
+            color: white;
+            padding: 1rem;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            height: 300px;
+            overflow-y: auto;
+        }
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+        .message.user {
+            background-color: var(--kleur-blauw-licht);
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        .message.ai {
+            background-color: #e9e9e9;
+            align-self: flex-start;
+        }
+        .message.ai small {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #555;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+            padding: 0.5rem;
+        }
+        #chat-input-field {
+            flex-grow: 1;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+        #chat-send-btn {
+            background: var(--kleur-groen);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin-left: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .sample-questions button {
+            background: none;
+            border: 1px solid var(--kleur-groen);
+            color: var(--kleur-groen);
+            padding: 5px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 3px;
+            font-size: 0.8rem;
+        }
+
+        /* --- Responsiviteit --- */
+        @media screen and (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.left::after, .timeline-item.right::after { left: 18px; }
+            .timeline-item.right { left: 0%; }
+            .timeline-item.left .timeline-content { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-title">
+            <h1>Efficiënt datagebruik</h1>
+            <p class="intro-text">Een interactieve gids om als onderwijsteam data te interpreteren en te benutten. Zet data om in inzicht en inzicht in actie.</p>
+        </div>
+    </header>
+
+    <!-- Sectie 1: De 7 Uitgangspunten -->
+    <section class="container">
+        <h2>De basis: Zeven uitgangspunten</h2>
+        <div class="cirkel-grid">
+            <div class="cirkel cirkel-1" data-modal="modal1">1. Student centraal</div>
+            <div class="cirkel cirkel-2" data-modal="modal2">2. Zichtbare visie</div>
+            <div class="cirkel cirkel-3" data-modal="modal3">3. Gezamenlijke verantwoordelijkheid</div>
+            <div class="cirkel cirkel-4" data-modal="modal4">4. Meten is weten</div>
+            <div class="cirkel cirkel-5" data-modal="modal5">5. Meer dan cijfers</div>
+            <div class="cirkel cirkel-6" data-modal="modal6">6. Integrale aanpak</div>
+            <div class="cirkel cirkel-7" data-modal="modal7">7. Evidence informed</div>
+        </div>
+    </section>
+
+    <!-- Sectie 2: Het Stappenplan -->
+    <section class="section-light">
+        <div class="container">
+            <h2>Van Data naar Doen: Het 7-Stappenplan</h2>
+            <div class="timeline">
+                <div class="timeline-item left" data-modal="stap1"><div class="timeline-content"><h3>1. Bepaal de aanleiding</h3></div></div>
+                <div class="timeline-item right" data-modal="stap2"><div class="timeline-content"><h3>2. Organiseer een teamgesprek</h3></div></div>
+                <div class="timeline-item left" data-modal="stap3"><div class="timeline-content"><h3>3. Verzamel gegevens</h3></div></div>
+                <div class="timeline-item right" data-modal="stap4"><div class="timeline-content"><h3>4. Genereer interpretaties</h3></div></div>
+                <div class="timeline-item left" data-modal="stap5"><div class="timeline-content"><h3>5. Beslis & Bepaal interventies</h3></div></div>
+                <div class="timeline-item right" data-modal="stap6"><div class="timeline-content"><h3>6. Implementeer de interventies</h3></div></div>
+                <div class="timeline-item left" data-modal="stap7"><div class="timeline-content"><h3>7. Evalueer de interventies</h3></div></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sectie 3: Casussen -->
+    <section class="container">
+        <h2>De Theorie in de Praktijk</h2>
+        <div class="tabs">
+            <button class="tab-button active" data-tab="casus1">Casus 1: Startersresultaat</button>
+            <button class="tab-button" data-tab="casus2">Casus 2: Jaarresultaat</button>
+        </div>
+
+        <div id="casus1" class="tab-content active">
+            <h3>Casus 1: Startersresultaat</h3>
+            <p>Het Startersresultaat is het aandeel van de nieuwe instromers dat een jaar later nog studeert of is uitgestroomd met een diploma. Het vormt het omgekeerde van eerstejaarsuitval.</p>
+            
+            <button class="accordion-btn">Wat zegt het Startersresultaat over jouw opleiding?</button>
+            <div class="accordion-panel"><p>Het laat zien wat het succes is van startende (nieuwe) studenten binnen de instelling.</p></div>
+            
+            <button class="accordion-btn">Waarom is zicht op het Startersresultaat belangrijk?</button>
+            <div class="accordion-panel"><p>Het niet succesvol zijn van startende studenten heeft invloed op het Jaar- en Diplomaresultaat.</p></div>
+
+            <button class="accordion-btn">Wat is het CIMO-model?</button>
+            <div class="accordion-panel"><p>CIMO staat voor Context, Interventie, Mechanismen, Outcomes. Het is een logische redeneerketen om een probleem aan te pakken: 'Voor dit probleem in deze <strong>Context</strong> is het nuttig om deze <strong>Interventie</strong> toe te passen, die door deze <strong>Mechanismen</strong> de volgende <strong>Outcomes</strong> zal genereren'.</p></div>
+        </div>
+
+        <div id="casus2" class="tab-content">
+            <h3>Casus 2: Jaarresultaat</h3>
+            <p>Het Jaarresultaat drukt het percentage gediplomeerde studenten uit van een cursusjaar ten opzichte van alle instellingsverlaters en gediplomeerde doorstromers.</p>
+
+            <button class="accordion-btn">Telt doorstroom naar een hoger niveau zonder diploma mee?</button>
+            <div class="accordion-panel"><p>Nee, doorstroom binnen de opleiding zonder diploma telt zowel bij Jaarresultaat als Diplomaresultaat niet mee. Tip: laat studenten eerst diplomeren op niveau 2 en dán doorstromen naar niveau 3, want dan telt het positief mee.</p></div>
+            
+            <button class="accordion-btn">Heeft het toelatingsrecht invloed op het Jaarresultaat?</button>
+            <div class="accordion-panel"><p>Ja, dit kan invloed hebben, met name op niveau 2. Goede registratie van de intake en nader onderzoek zijn hierbij essentieel om de effecten te begrijpen.</p></div>
+        </div>
+    </section>
+
+    <!-- Modals (Pop-up content) -->
+    <div id="modal-container">
+        <!-- Modals voor uitgangspunten -->
+        <div id="modal1" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Uitgangspunt 1: Student centraal</h3><p>Wij willen het beste voor onze studenten, het onderwijsteam is hierbij de spil.</p></div></div>
+        <div id="modal2" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Uitgangspunt 2: Zichtbare visie</h3><p>De onderwijsorganisatie heeft een onderwijsvisie en deze is zicht- en merkbaar in het onderwijs, het lesgeven en de begeleiding.</p></div></div>
+        <div id="modal3" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Uitgangspunt 3: Gezamenlijke verantwoordelijkheid</h3><p>Docenten nemen en dragen gezamenlijk verantwoordelijkheid voor de ontwikkeling en het succes van hun studenten.</p></div></div>
+        <div id="modal4" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Uitgangspunt 4: Meten is weten</h3><p>'Meten is weten en kennen is weten' – Het onderwijsteam heeft goed zicht op de cijfers zoals aantal studenten en VSV'ers, uitval, doorstroom, studievertraging en gediplomeerde en ongediplomeerde uitstroom.</p></div></div>
+        <div id="modal5" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Uitgangspunt 5: Meer dan cijfers</h3><p>Studiesucces is meer dan cijfers – Het onderwijsteam heeft door middel van onderzoek inzicht in het verhaal achter de cijfers.</p></div></div>
+        <div id="modal6" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Uitgangspunt 6: Integrale aanpak</h3><p>We worden beter door een integrale aanpak, gebaseerd op een gezamenlijke visie op ontwikkelen en succes.</p></div></div>
+        <div id="modal7" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Uitgangspunt 7: Evidence informed</h3><p>De gekozen oplossingen zijn evidence informed (gebaseerd op literatuur) en moeten te allen tijde ten goede komen aan de student(en), zonder concessies te doen aan de kwaliteit.</p></div></div>
+        <!-- Modals voor stappenplan -->
+        <div id="stap1" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Stap 1: Bepaal de aanleiding</h3><p>Waarom wil je als onderwijsteam data gaan gebruiken? Is dat om te verantwoorden, te verbeteren, of voor operationele sturing? De aanleiding bepaalt je focus.</p></div></div>
+        <div id="stap2" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Stap 2: Organiseer een teamgesprek</h3><p>Ga als team in gesprek over welke factoren jullie wel en niet kunnen beïnvloeden. Dit creëert draagvlak en een gezamenlijk startpunt.</p></div></div>
+        <div id="stap3" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Stap 3: Verzamel relevante gegevens</h3><p>Verzamel betrouwbare kwantitatieve (cijfers) en kwalitatieve (gesprekken, observaties) data om te controleren of de geïdentificeerde factoren inderdaad invloed hebben.</p></div></div>
+        <div id="stap4" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Stap 4: Genereer interpretaties</h3><p>Analyseer de data en kom tot geloofwaardige interpretaties. Formuleer hypotheses. Bijvoorbeeld: 'Als we X doen, dan verwachten we Y, omdat Z'.</p></div></div>
+        <div id="stap5" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Stap 5: Beslis & Bepaal interventies</h3><p>Beslis welke oorzaak het meest relevant en urgent is. Bepaal samen met stakeholders (studenten, werkveld) het gewenste resultaat en welke interventies daarvoor geschikt zijn.</p></div></div>
+        <div id="stap6" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Stap 6: Implementeer de interventies</h3><p>Voer de gekozen interventies uit in de onderwijspraktijk. Zorg dat voor iedereen duidelijk is wie wat doet en wanneer.</p></div></div>
+        <div id="stap7" class="modal"><div class="modal-content"><span class="close-btn">×</span><h3>Stap 7: Evalueer de interventies</h3><p>Evalueer, samen met stakeholders, of de gewenste resultaten zijn behaald. Gebruik hiervoor de PDSA-cyclus (Plan-Do-Study-Act). Zo nee, doorloop het stappenplan opnieuw om te leren en bij te sturen.</p></div></div>
+    </div>
+
+    <!-- AI Assistent Widget -->
+    <button id="chat-toggle"><i class="fa-solid fa-comments"></i></button>
+    <div id="chat-widget">
+        <div class="chat-header">
+            <h3>Data-assistent</h3>
+            <p>Stel een vraag over de handreiking</p>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+             <div class="message ai">
+                Hallo! Ik ben de Data-assistent. Hoe kan ik je helpen?
+                <div class="sample-questions">
+                    <small>Probeer bijvoorbeeld:</small><br>
+                    <button>Wat is het stappenplan?</button>
+                    <button>Wat is het verschil tussen Jaarresultaat en Startersresultaat?</button>
+                    <button>Hoe organiseer ik een goed teamgesprek?</button>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input-field" placeholder="Typ je vraag...">
+            <button id="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Modal Logic ---
+    const modalContainer = document.getElementById('modal-container');
+    document.querySelectorAll('[data-modal]').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const modalId = trigger.getAttribute('data-modal');
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        });
+    });
+    
+    modalContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal') || e.target.classList.contains('close-btn')) {
+            document.querySelectorAll('.modal').forEach(modal => modal.style.display = 'none');
+        }
+    });
+
+    // --- Tabs Logic ---
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabId = button.getAttribute('data-tab');
+
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            button.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+
+    // --- Accordion Logic ---
+    const accordionBtns = document.querySelectorAll('.accordion-btn');
+    accordionBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    });
+    
+    // --- AI Chatbot Logic ---
+    const chatToggle = document.getElementById('chat-toggle');
+    const chatWidget = document.getElementById('chat-widget');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input-field');
+    const chatSendBtn = document.getElementById('chat-send-btn');
+
+    chatToggle.addEventListener('click', () => {
+        chatWidget.classList.toggle('open');
+    });
+
+    // --- AI Response Database (Simulatie) ---
+    const aiResponses = {
+        'default': "Dat begrijp ik niet helemaal. Kun je de vraag anders formuleren? Ik kan je helpen met vragen over het stappenplan, de casussen (jaarresultaat, startersresultaat) en de uitgangspunten.",
+        'stappenplan': "Het stappenplan bestaat uit 7 stappen: 1. Bepaal aanleiding, 2. Organiseer teamgesprek, 3. Verzamel gegevens, 4. Genereer interpretaties, 5. Bepaal interventies, 6. Implementeer, 7. Evalueer. <small>Klik op de stappen in de infographic voor meer details!</small>",
+        'jaarresultaat': "Het Jaarresultaat is het percentage gediplomeerde studenten ten opzichte van alle uitstromers (met en zonder diploma). Het geeft aan hoe succesvol een opleiding is in het begeleiden van studenten naar een diploma of het behouden van hen in de opleiding.",
+        'startersresultaat': "Het Startersresultaat is het aandeel nieuwe instromers dat na één jaar nog studeert of een diploma heeft behaald. Het is een belangrijke indicator voor het voorkomen van eerstejaarsuitval.",
+        'verschil': "Het <strong>Startersresultaat</strong> kijkt specifiek naar het succes van *nieuwe* studenten in hun eerste jaar. Het <strong>Jaarresultaat</strong> kijkt naar *alle* studenten in een bepaald jaar en hun succes (diploma of doorstroom), ongeacht hoe lang ze al studeren.",
+        'teamgesprek': "Een goed teamgesprek organiseer je door: 1. Duidelijk het doel te bepalen (wat willen we weten/bereiken?). 2. Te focussen op factoren die het team kan beïnvloeden. 3. Zowel kwantitatieve als kwalitatieve data mee te nemen in het gesprek. 4. Samen hypotheses op te stellen.",
+        'cimo': "CIMO staat voor Context, Interventie, Mechanismen, Outcomes. Het is een denkkader om problemen gestructureerd aan te pakken. De gedachte is: 'Voor dit probleem in deze <strong>Context</strong> is deze <strong>Interventie</strong> nuttig, die via deze <strong>Mechanismen</strong> leidt tot de gewenste <strong>Outcomes</strong>'.",
+        'uitgangspunten': "Er zijn 7 uitgangspunten, waaronder 'Student centraal', 'Gezamenlijke verantwoordelijkheid', en 'Meer dan cijfers'. Ze vormen de basis voor een succesvolle datagedreven cultuur. <small>Klik op de cirkels bovenaan de pagina om ze allemaal te zien!</small>",
+        'hoi|hallo': "Hallo! Hoe kan ik je vandaag helpen met efficiënt datagebruik?"
+    };
+
+    function getAIResponse(userInput) {
+        const input = userInput.toLowerCase();
+        for (const key in aiResponses) {
+            const keywords = key.split('|');
+            if (keywords.some(keyword => input.includes(keyword))) {
+                return aiResponses[key];
+            }
+        }
+        return aiResponses['default'];
+    }
+
+    function addMessage(text, type) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', type);
+        messageDiv.innerHTML = text; // Gebruik innerHTML om opmaak zoals <strong> toe te staan
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to bottom
+    }
+
+    function handleChat() {
+        const userInput = chatInput.value.trim();
+        if (userInput === '') return;
+
+        addMessage(userInput, 'user');
+        chatInput.value = '';
+
+        setTimeout(() => {
+            const aiResponse = getAIResponse(userInput);
+            addMessage(aiResponse, 'ai');
+        }, 1000); // Simuleer denktijd
+    }
+
+    chatSendBtn.addEventListener('click', handleChat);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleChat();
+        }
+    });
+    
+    // Voeg functionaliteit toe aan de voorbeeldvragen knoppen
+    document.querySelectorAll('.sample-questions button').forEach(button => {
+        button.addEventListener('click', () => {
+            chatInput.value = button.textContent;
+            handleChat();
+        });
+    });
+});
+</script>
+
+</body>
+</html>
