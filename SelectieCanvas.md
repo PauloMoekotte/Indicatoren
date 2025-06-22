@@ -81,6 +81,7 @@ De kerndistincties tussen onderwijskundige en managementcontexten strekken zich 
 6. Vergelijkende Analyse: Divergerende Benaderingen en Gedeelde Uitdagingen
 Een directe vergelijking van indicatortypen, meetmethodologieën en typische meetgegevens die in onderwijs en management worden gebruikt, onthult zowel verschillende benaderingen als gemeenschappelijke uitdagingen.
 Directe Vergelijking van Indicatortypen, Meetmethodologieën en Typische Meetgegevens
+
 | Indicatortype         | Onderwijskundige Indicatoren (MBO-voorbeelden)                                               | Management-/Organisatie-indicatoren (Algemene voorbeelden)                       |
 |-----------------------|---------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
 | Input                 | Financiering per student, Student/docent ratio, Kwalificaties docenten, Praktijkruimtes     | (Vaak geïntegreerd in operationele/financiële KPI's)                            |
