@@ -1,4 +1,4 @@
-Uitstekende en zeer belangrijke vraag. U raakt de kern van waarom Julie Bayley's aanpak meer een "mindset" is dan een checklist. De principes zijn inderdaad niet losstaand; hun kracht schuilt juist in hun diepe onderlinge samenhang.
+In de kern is Julie Bayley's aanpak meer een "mindset" dan een checklist. De principes zijn niet losstaand; hun kracht schuilt juist in hun diepe onderlinge samenhang.
 
 ### De Samenhang tussen de Principes
 
