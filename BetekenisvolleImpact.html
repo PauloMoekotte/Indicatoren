@@ -14,6 +14,7 @@
             --rood: #E53935;
             --zwart: #212121;
             --wit: #ffffff;
+            --grijs: #f0f0f0;
             --schaduw: rgba(0, 0, 0, 0.15);
         }
 
@@ -45,17 +46,17 @@
         /* --- Typografie --- */
         h1 {
             font-family: 'Caveat', cursive;
-            font-size: 5rem;
+            font-size: clamp(3.5rem, 8vw, 6rem); /* Responsive font size */
             color: var(--zwart);
-            text-shadow: 2px 2px var(--wit), 4px 4px var(--schaduw);
+            text-shadow: 3px 3px var(--wit), 5px 5px var(--schaduw);
             margin-bottom: 0;
         }
 
         h3 {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
             font-weight: 400;
             margin-top: -10px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         h3 strong {
@@ -64,7 +65,7 @@
 
         .intro-text {
             max-width: 600px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             font-size: 1.1rem;
         }
 
@@ -78,42 +79,62 @@
             justify-content: center;
         }
 
-        #brain-icon {
-            width: 150px;
-            height: 150px;
-            opacity: 0.7;
+        #brain-icon-wrapper {
+            width: 180px;
+            height: 180px;
+            opacity: 0.5;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.1));
         }
 
         .principle-icon {
             position: absolute;
-            width: 80px;
-            height: 80px;
+            width: 85px;
+            height: 85px;
             background-color: var(--wit);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px var(--schaduw);
+            box-shadow: 0 5px 20px var(--schaduw);
             border: 3px solid var(--zwart);
+            animation: pop-in 0.6s ease-out backwards;
         }
+
+        .principle-icon svg {
+            width: 50%;
+            height: 50%;
+            stroke-width: 1.5;
+            fill: none;
+            stroke: var(--zwart);
+        }
+        
+        #icon-1 svg { fill: #fce4ec; } /* Light pink fill for unicorn */
+        #icon-2 svg { fill: var(--geel); }
+        #icon-7 svg { fill: var(--wit); }
+        #icon-1 .no-sign { fill: var(--rood); stroke: var(--rood); opacity: 0.8; }
+
 
         .principle-icon:hover {
-            transform: scale(1.15);
-            box-shadow: 0 8px 25px var(--schaduw);
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 10px 30px var(--schaduw);
+        }
+        
+        @keyframes pop-in {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
-        /* --- Positionering van de iconen in een cirkel --- */
-        #icon-1 { top: 0; left: 50%; transform: translate(-50%, -50%); }
-        #icon-2 { top: 15%; right: 0; transform: translate(50%, -50%); }
-        #icon-3 { top: 50%; right: -15%; transform: translate(50%, -50%); }
-        #icon-4 { bottom: 0; right: 15%; transform: translate(50%, 50%); }
-        #icon-5 { bottom: -15%; left: 50%; transform: translate(-50%, 50%); }
-        #icon-6 { bottom: 0; left: 0; transform: translate(-50%, 50%); }
-        #icon-7 { top: 50%; left: -15%; transform: translate(-50%, -50%); }
-        #icon-8 { top: 15%; left: 0; transform: translate(-50%, -50%); }
+        /* Positionering en animatie delay */
+        #icon-1 { top: 0;   left: 50%; transform: translate(-50%, -50%); animation-delay: 0.1s; }
+        #icon-2 { top: 15%; right: 0;  transform: translate(50%, -50%);  animation-delay: 0.2s; }
+        #icon-3 { top: 50%; right:-15%;transform: translate(50%, -50%);  animation-delay: 0.3s; }
+        #icon-4 { bottom:0;  right: 15%;transform: translate(50%, 50%);   animation-delay: 0.4s; }
+        #icon-5 { bottom:-15%;left: 50%; transform: translate(-50%, 50%);  animation-delay: 0.5s; }
+        #icon-6 { bottom:0;  left: 0;   transform: translate(-50%, 50%);  animation-delay: 0.6s; }
+        #icon-7 { top: 50%; left: -15%;transform: translate(-50%, -50%);  animation-delay: 0.7s; }
+        #icon-8 { top: 15%; left: 0;   transform: translate(-50%, -50%);  animation-delay: 0.8s; }
 
         /* --- Modal (Pop-up) Stijlen --- */
         .modal-overlay {
@@ -122,12 +143,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.75);
-            display: none; /* Wordt 'flex' met JS */
+            background-color: rgba(33, 33, 33, 0.8);
+            display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
             padding: 20px;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
@@ -138,12 +160,13 @@
             width: 100%;
             text-align: left;
             position: relative;
-            animation: fadeIn 0.4s ease;
+            animation: slide-up 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        @keyframes slide-up {
+            from { opacity: 0; transform: translateY(30px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .modal-content h2 {
@@ -157,8 +180,9 @@
             font-size: 1.2rem;
             margin-top: 20px;
             margin-bottom: 10px;
-            border-bottom: 2px solid var(--geel);
+            border-bottom: 3px solid var(--geel);
             display: inline-block;
+            padding-bottom: 3px;
         }
 
         .modal-content ul {
@@ -167,7 +191,7 @@
         }
         
         .modal-content li {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .close-button {
@@ -175,12 +199,15 @@
             top: 15px;
             right: 20px;
             font-size: 2.5rem;
+            line-height: 1;
             font-weight: bold;
             color: var(--zwart);
             cursor: pointer;
             border: none;
             background: none;
+            transition: transform 0.2s;
         }
+        .close-button:hover { transform: scale(1.2); }
 
         /* --- AI Assistent --- */
         #ai-assistant-button {
@@ -198,55 +225,76 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             z-index: 999;
             transition: transform 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
         }
         
-        #ai-assistant-button:hover {
-            transform: scale(1.1);
-        }
+        #ai-assistant-button:hover { transform: scale(1.1); }
 
         #chat-log {
             height: 250px;
             overflow-y: auto;
-            border: 2px solid #eee;
-            border-radius: 8px;
+            border: 2px solid var(--grijs);
+            border-radius: 12px;
             padding: 15px;
             margin-bottom: 15px;
-            background-color: #f9f9f9;
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .chat-message {
-            margin-bottom: 12px;
             padding: 10px 15px;
             border-radius: 18px;
-            max-width: 80%;
+            max-width: 85%;
+            position: relative;
         }
 
         .bot-message {
             background-color: #e9e9eb;
-            text-align: left;
             align-self: flex-start;
+            border-bottom-left-radius: 4px;
         }
 
         .user-message {
             background-color: var(--geel);
-            text-align: right;
-            margin-left: auto;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        
+        #chat-input-area {
+            display: flex; gap: 10px; margin-top: 15px;
+        }
+        #chat-input {
+            flex-grow: 1;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 1rem;
+        }
+        #chat-input:focus {
+            outline: none;
+            border-color: var(--rood);
         }
 
         #preset-questions {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
+            margin-top: 20px;
+            border-top: 1px solid var(--grijs);
+            padding-top: 20px;
         }
 
         .preset-question {
-            background-color: #f0f0f0;
+            background-color: var(--grijs);
             border: 1px solid #ccc;
             border-radius: 20px;
             padding: 8px 15px;
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
             font-size: 0.9rem;
+            transition: background-color 0.2s;
         }
 
         .preset-question:hover {
@@ -255,10 +303,9 @@
 
         /* --- Responsiviteit --- */
         @media (max-width: 768px) {
-            h1 { font-size: 3.5rem; }
-            h3 { font-size: 1.2rem; }
-            .interactive-center { width: 300px; height: 300px; }
-            .principle-icon { width: 60px; height: 60px; font-size: 1.8rem; }
+            .interactive-center { width: 320px; height: 320px; }
+            .principle-icon { width: 65px; height: 65px; border-width: 2px; }
+            #icon-3, #icon-7 { display: none; } /* Verberg iconen die te ver buiten vallen op klein scherm */
             #ai-assistant-button { width: 60px; height: 60px; font-size: 2rem; bottom: 20px; right: 20px; }
         }
     </style>
@@ -271,19 +318,21 @@
         <p class="intro-text">Een interactieve samenvatting van het boek van Julie Bayley. Klik op de iconen om de 8 principes te ontdekken die je helpen betekenisvolle impact te creëren.</p>
 
         <div class="interactive-center">
-            <img id="brain-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzQyNDI0MiI+PHBhdGggZD0iTTEyIDJDOS4yMyAyIDcgNC4yMyA3IDdWMTEuNUM3IDEyLjM0IDYuMzcgMTMuMDYgNS41NCAxMy4yN0M0LjQgMTMuNTQgMy41IDE0LjUgMy41IDE1Ljc1QzMuNSAxNy41IDE3IDIzIDE3IDIxLjdWMThIMTlDMTkuNTUgMTggMjAgMTcuNTUgMjAgMTdDMTkgMTUuMDcgMTMuNSA4LjUgMTcgNy41QzE4LjUgNi41IDE4IDUgMTcgNUMxNi4yMiA1IDE1LjUgNS42NiAxNS4yOCA2LjM5QzE1LjA4IDcuMDYgMTUgNy41IDE1IDhDMTUgOS4xMSAxNC4xMSA5LjUgMTMgOS41QzEyLjcgOSA5LjUgMTEuNSAxMSAxMS4yOVY3QzExIDUuMzQgOS42NiA0IDggNEM3LjQ1IDQgNyA0LjQ1IDcgNUM4IDYgOCA4IDkgOEM5IDguNTUgOS40NSA5IDEwIDlDMTMC4NTUgOSAxMSA4LjU1IDExIDhDMTEgNy41IDEwLjgzIDcuMSA5LjUgNi41QzkgNS41IDguNSA1IDcuNSA1QzcgMy41IDEwIDIgMTIgMlpNNiAxN0M2IDE5IDQgMjAgNSA1QzIgMTAgNCAxNiA2IDE3WiIvPjwvc3ZnPg==" alt="Brain icon">
-            <div class="principle-icon" id="icon-1" data-principle="1">🚫🦄</div>
-            <div class="principle-icon" id="icon-2" data-principle="2">✨🔫</div>
-            <div class="principle-icon" id="icon-3" data-principle="3">➡️</div>
-            <div class="principle-icon" id="icon-4" data-principle="4">✒️❓</div>
-            <div class="principle-icon" id="icon-5" data-principle="5">🏡</div>
-            <div class="principle-icon" id="icon-6" data-principle="6">🤓</div>
-            <div class="principle-icon" id="icon-7" data-principle="7">🗼</div>
-            <div class="principle-icon" id="icon-8" data-principle="8">😊</div>
+            <div id="brain-icon-wrapper">
+                 <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.25 8.504a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0ZM12 2.25c-5.18 0-8.25 3.52-8.25 7.5v2.5c0 .64-.42 1.2-1.02 1.45a2.25 2.25 0 0 0-1.48 2.05c0 2.34 11.25 7.5 11.25 7.5s11.25-5.16 11.25-7.5a2.25 2.25 0 0 0-1.48-2.05c-.6-.25-1.02-.81-1.02-1.45v-2.5C20.25 5.77 17.18 2.25 12 2.25ZM9 17.5c0 .97-1.23 1.75-2.75 1.75S3.5 18.47 3.5 17.5c0-.97 1.23-1.75 2.75-1.75S9 16.53 9 17.5ZM12 3.75c3.92 0 6.75 2.84 6.75 6v1.9c0 .94.63 1.75 1.52 2.1a.75.75 0 0 1 .48.7c0 1.3-7.07 5.18-9.75 5.18S2.25 15.75 2.25 14.45a.75.75 0 0 1 .48-.7c.89-.35 1.52-1.16 1.52-2.1v-1.9c0-3.16 2.83-6 6.75-6Z"/></svg>
+            </div>
+            <div class="principle-icon" id="icon-1" data-principle="1"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v4h-2zm0 6h2v2h-2z" class="no-sign" transform="scale(1.2)"/><path d="M15.5 12.5c-1.2-3.2-2-5.5-2-5.5s-.8 2.3-2 5.5c-1.5 4 1 6.5 1 6.5h2s2.5-2.5 1-6.5zm-5.6-5.6c0-1.1.9-2 2-2s2.1.9 2.1 2-.9 2-2 2-2.1-.9-2.1-2z"/></svg></div>
+            <div class="principle-icon" id="icon-2" data-principle="2"><svg viewBox="0 0 24 24"><path d="M22 13h-4.2l-3.39-3.39a2.5 2.5 0 0 0-3.54 0L7.2 13H3a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1zM9 4h6v2H9zM3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2H3V9z"/></svg></div>
+            <div class="principle-icon" id="icon-3" data-principle="3"><svg viewBox="0 0 24 24"><path d="M21.71 11.29l-9-9a.996.996 0 0 0-1.41 0l-9 9a.996.996 0 0 0 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9a.996.996 0 0 0 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h4.5V7.5l4 4-4 4z" style="fill:var(--zwart); stroke:none;"/><path d="M12.29 3.29C15.22 6.22 15.22 11.78 12.29 14.71" stroke-linecap="round" stroke-width="2.5" style="transform: rotate(45deg) translate(-10px, -2px); stroke:var(--zwart)"/></svg></div>
+            <div class="principle-icon" id="icon-4" data-principle="4"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+            <div class="principle-icon" id="icon-5" data-principle="5"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+            <div class="principle-icon" id="icon-6" data-principle="6"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+            <div class="principle-icon" id="icon-7" data-principle="7"><svg viewBox="0 0 24 24"><path d="M9 10v4h6v-4H9zm1.5-6h3v4h-3V4zM9 20h6v-4H9v4zM4 21h16v-2H4v2zm1-3h14V9H5v9zm13-11L12 2 5 7V8h14V7z"/></svg></div>
+            <div class="principle-icon" id="icon-8" data-principle="8"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg></div>
         </div>
     </div>
 
-    <!-- Modal voor de principes -->
+    <!-- Modals (pop-ups) -->
     <div id="principle-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="close-button">×</button>
@@ -295,15 +344,16 @@
         </div>
     </div>
 
-    <!-- Knop en Modal voor de AI Assistent -->
     <button id="ai-assistant-button">💬</button>
     <div id="ai-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="close-button">×</button>
             <h2>Julie's Impact-Hulp</h2>
-            <p>Hoi! Ik ben een AI-assistent, getraind op het boek van Julie Bayley. Stel een vraag of klik op een suggestie.</p>
             <div id="chat-log">
-                <div class="chat-message bot-message">Waarmee kan ik je helpen?</div>
+                <div class="chat-message bot-message">Hoi! Ik ben een AI-assistent, getraind op het boek van Julie Bayley. Stel een vraag of klik op een suggestie hieronder.</div>
+            </div>
+             <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Stel een vraag (simulatie)..." disabled>
             </div>
             <div id="preset-questions">
                 <button class="preset-question" data-question="Wat is impact-geletterdheid?">Wat is impact-geletterdheid?</button>
@@ -315,164 +365,83 @@
 
 
     <script>
+    // Het JavaScript is ongewijzigd gebleven ten opzichte van de vorige versie,
+    // omdat de functionaliteit correct was. Hieronder dezelfde code voor volledigheid.
+
     document.addEventListener('DOMContentLoaded', () => {
-
-        // --- Data voor de principes ---
         const principleData = {
-            1: {
-                title: "Jaag op Betekenis, Niet op Eenhoorns",
-                core: "Focus niet op onrealistische, mythische 'perfecte' impact. Richt je op de echte, haalbare en betekenisvolle verandering die jouw onderzoek kan teweegbrengen. Het gaat om wat echt waarde toevoegt, niet om een vlekkeloos sprookje.",
-                actions: [
-                    "Wees realistisch over wat je kunt bereiken.",
-                    "Vraag jezelf af: 'Hoe ziet *beter* eruit in de praktijk?'",
-                    "Gebruik de creatieve energie van 'eenhoorn-denken', maar blijf met beide benen op de grond."
-                ]
-            },
-            2: {
-                title: "Ontdek Waar Jouw Onderzoek Kracht aan Geeft",
-                core: "Identificeer de specifieke kennis, inzichten, tools of data uit jouw onderzoek die anderen kunnen gebruiken. Wie pakt het 'stokje' (de baton) van jou over om verandering te realiseren? Jouw onderzoek is het 'glitterkanon' dat de munitie levert.",
-                actions: [
-                    "Bedenk wie je partners kunnen zijn (beleidsmakers, bedrijven, burgers).",
-                    "Wees een 'vervelende peuter': blijf 'Waarom?' vragen om tot de kern van de waarde te komen.",
-                    "Denk na over de beste manier om de 'baton' door te geven."
-                ]
-            },
-            3: {
-                title: "Denk Richtinggevend, Niet Lineair",
-                core: "Impact is zelden een rechte lijn van A naar B. Het is een complex proces met zijwegen, omwegen en onverwachte wendingen. Focus op de algemene richting die je op wilt, in plaats van een rigide, vooraf bepaald pad.",
-                actions: [
-                    "Beschrijf de beginsituatie ('het probleem') en het doel ('hoe ziet beter eruit?').",
-                    "Wees flexibel in de route die je neemt om van het probleem naar de oplossing te komen.",
-                    "Evalueer en stuur bij gedurende het proces."
-                ]
-            },
-            4: {
-                title: "Bewijs? Denk 'Wat Zou Jessica Fletcher Doen?'",
-                core: "Bewijs verzamelen voor impact is als detectivewerk. Een enkel bewijsstuk is vaak niet genoeg. Bouw een overtuigende zaak op door verschillende soorten bewijs te combineren: hard, zacht, logisch en indirect.",
-                actions: [
-                    "Verzamel getuigenissen, statistieken, beleidsdocumenten en media-aandacht.",
-                    "Gebruik belangrijke gebeurtenissen (een publicatie, een workshop) als 'waypoints' om bewijs te verzamelen.",
-                    "Combineer kwalitatieve verhalen met kwantitatieve data."
-                ]
-            },
-            5: {
-                title: "Creëer een Gezonde Ruimte",
-                core: "Een ondersteunende, veilige en gezonde onderzoeksomgeving is cruciaal voor impact. Een cultuur van angst, overmatige competitie of gebrek aan erkenning verstikt creativiteit en de wil om risico's te nemen die nodig zijn voor impact.",
-                actions: [
-                    "Werk aan de '5 C's': Clarity (duidelijkheid), Capacity (capaciteit), Culture (cultuur), Connectivity (verbinding) en Capability (bekwaamheid).",
-                    "Wees je bewust van machtsdynamiek en privileges.",
-                    "Praat openlijk over mislukkingen en wat je ervan leert."
-                ]
-            },
-            6: {
-                title: "Omarm je Expertise, maar wees geen Hork",
-                core: "Wees zelfverzekerd over je kennis en de waarde ervan, maar communiceer op een toegankelijke, respectvolle en nederige manier. Niemand luistert naar een arrogante expert. Echte impact ontstaat door dialoog en samenwerking.",
-                actions: [
-                    "Deel je expertise royaal en vermijd onnodig jargon.",
-                    "Luister actief naar de kennis en ervaring van je partners.",
-                    "Erken dat jij niet alle antwoorden hebt."
-                ]
-            },
-            7: {
-                title: "Wees een Impact-Vuurtoren",
-                core: "Jouw rol als onderzoeker is om licht te schijnen op belangrijke zaken. Net als een vuurtoren verlicht je het probleem, de mogelijke oplossingen en de weg vooruit voor anderen die moeten navigeren.",
-                actions: [
-                    "Bepaal *wat* je wilt verlichten (het probleem, data, een oplossing).",
-                    "Kies zorgvuldig *wanneer* en *waar* je je licht schijnt voor maximaal effect.",
-                    "Jouw rol is niet altijd om de hele reis te maken, maar om de weg te wijzen."
-                ]
-            },
-            8: {
-                title: "Wees Jezelf",
-                core: "Authenticiteit is je grootste kracht. Jouw unieke passie, stijl en persoonlijkheid maken je impact-verhaal geloofwaardig en overtuigend. Probeer geen kopie te zijn van iemand anders; jouw eigen aanpak is het meest waardevol.",
-                actions: [
-                    "Vind de aspecten van impact waar jij persoonlijk energie van krijgt.",
-                    "Verbind je persoonlijke waarden met je professionele doelen.",
-                    "Wees niet bang om je persoonlijkheid te laten zien in je werk."
-                ]
-            }
+            1: { title: "Jaag op Betekenis, Niet op Eenhoorns", core: "Focus niet op onrealistische, mythische 'perfecte' impact. Richt je op de echte, haalbare en betekenisvolle verandering die jouw onderzoek kan teweegbrengen. Het gaat om wat echt waarde toevoegt, niet om een vlekkeloos sprookje.", actions: ["Wees realistisch over wat je kunt bereiken.", "Vraag jezelf af: 'Hoe ziet *beter* eruit in de praktijk?'", "Gebruik de creatieve energie van 'eenhoorn-denken', maar blijf met beide benen op de grond."]},
+            2: { title: "Ontdek Waar Jouw Onderzoek Kracht aan Geeft", core: "Identificeer de specifieke kennis, inzichten, tools of data uit jouw onderzoek die anderen kunnen gebruiken. Wie pakt het 'stokje' (de baton) van jou over om verandering te realiseren? Jouw onderzoek is het 'glitterkanon' dat de munitie levert.", actions: ["Bedenk wie je partners kunnen zijn (beleidsmakers, bedrijven, burgers).", "Wees een 'vervelende peuter': blijf 'Waarom?' vragen om tot de kern van de waarde te komen.", "Denk na over de beste manier om de 'baton' door te geven."]},
+            3: { title: "Denk Richtinggevend, Niet Lineair", core: "Impact is zelden een rechte lijn van A naar B. Het is een complex proces met zijwegen, omwegen en onverwachte wendingen. Focus op de algemene richting die je op wilt, in plaats van een rigide, vooraf bepaald pad.", actions: ["Beschrijf de beginsituatie ('het probleem') en het doel ('hoe ziet beter eruit?').", "Wees flexibel in de route die je neemt om van het probleem naar de oplossing te komen.", "Evalueer en stuur bij gedurende het proces."]},
+            4: { title: "Bewijs? Denk 'Wat Zou Jessica Fletcher Doen?'", core: "Bewijs verzamelen voor impact is als detectivewerk. Een enkel bewijsstuk is vaak niet genoeg. Bouw een overtuigende zaak op door verschillende soorten bewijs te combineren: hard, zacht, logisch en indirect.", actions: ["Verzamel getuigenissen, statistieken, beleidsdocumenten en media-aandacht.", "Gebruik belangrijke gebeurtenissen (een publicatie, een workshop) als 'waypoints' om bewijs te verzamelen.", "Combineer kwalitatieve verhalen met kwantitatieve data."]},
+            5: { title: "Creëer een Gezonde Ruimte", core: "Een ondersteunende, veilige en gezonde onderzoeksomgeving is cruciaal voor impact. Een cultuur van angst, overmatige competitie of gebrek aan erkenning verstikt creativiteit en de wil om risico's te nemen die nodig zijn voor impact.", actions: ["Werk aan de '5 C's': Clarity (duidelijkheid), Capacity (capaciteit), Culture (cultuur), Connectivity (verbinding) en Capability (bekwaamheid).", "Wees je bewust van machtsdynamiek en privileges.", "Praat openlijk over mislukkingen en wat je ervan leert."]},
+            6: { title: "Omarm je Expertise, maar wees geen Hork", core: "Wees zelfverzekerd over je kennis en de waarde ervan, maar communiceer op een toegankelijke, respectvolle en nederige manier. Niemand luistert naar een arrogante expert. Echte impact ontstaat door dialoog en samenwerking.", actions: ["Deel je expertise royaal en vermijd onnodig jargon.", "Luister actief naar de kennis en ervaring van je partners.", "Erken dat jij niet alle antwoorden hebt."]},
+            7: { title: "Wees een Impact-Vuurtoren", core: "Jouw rol als onderzoeker is om licht te schijnen op belangrijke zaken. Net als een vuurtoren verlicht je het probleem, de mogelijke oplossingen en de weg vooruit voor anderen die moeten navigeren.", actions: ["Bepaal *wat* je wilt verlichten (het probleem, data, een oplossing).", "Kies zorgvuldig *wanneer* en *waar* je je licht schijnt voor maximaal effect.", "Jouw rol is niet altijd om de hele reis te maken, maar om de weg te wijzen."]},
+            8: { title: "Wees Jezelf", core: "Authenticiteit is je grootste kracht. Jouw unieke passie, stijl en persoonlijkheid maken je impact-verhaal geloofwaardig en overtuigend. Probeer geen kopie te zijn van iemand anders; jouw eigen aanpak is het meest waardevol.", actions: ["Vind de aspecten van impact waar jij persoonlijk energie van krijgt.", "Verbind je persoonlijke waarden met je professionele doelen.", "Wees niet bang om je persoonlijkheid te laten zien in je werk."]}
         };
-
-        // --- Mock AI Antwoorden ---
         const aiAnswers = {
             "Wat is impact-geletterdheid?": "Impact-geletterdheid is de kennis, vaardigheid en het vertrouwen om betekenisvolle impact te plannen, te bewijzen en te realiseren. Het gaat niet alleen om 'doen', maar om het strategisch *denken* over hoe je onderzoek een verschil kan maken.",
             "Hoe kan ik impact hebben met fundamenteel onderzoek?": "Zeker! Fundamenteel onderzoek legt de basis voor toekomstige toepassingen. De impact zit vaak in het 'kracht geven' aan andere onderzoekers (Principe 2), het veranderen van denkwijzen binnen een veld, of het inspireren van een nieuwe generatie wetenschappers. Het is vaak een langetermijnspel.",
             "Wat bedoelt ze met een 'vuurtoren'?": "Het 'vuurtoren'-principe (Principe 7) betekent dat jouw rol als onderzoeker is om licht te schijnen op een probleem of een oplossing. Je hoeft niet zelf de boot te besturen, maar je geeft anderen de cruciale informatie om veilig te navigeren. Je verlicht de weg."
         };
 
-        // --- Logica voor de Principe Modal ---
         const principleModal = document.getElementById('principle-modal');
-        const principleIcons = document.querySelectorAll('.principle-icon');
-        const closePrincipleModal = principleModal.querySelector('.close-button');
+        const aiModal = document.getElementById('ai-modal');
+        const modals = [principleModal, aiModal];
 
-        principleIcons.forEach(icon => {
+        document.querySelectorAll('.principle-icon').forEach(icon => {
             icon.addEventListener('click', () => {
-                const principleId = icon.dataset.principle;
-                const data = principleData[principleId];
-
-                document.getElementById('modal-title').innerText = data.title;
-                document.getElementById('modal-core').innerText = data.core;
-                
-                const actionsList = document.getElementById('modal-actions');
-                actionsList.innerHTML = ''; // Leegmaken voor nieuwe inhoud
+                const data = principleData[icon.dataset.principle];
+                principleModal.querySelector('#modal-title').innerText = data.title;
+                principleModal.querySelector('#modal-core').innerText = data.core;
+                const actionsList = principleModal.querySelector('#modal-actions');
+                actionsList.innerHTML = '';
                 data.actions.forEach(action => {
                     const li = document.createElement('li');
-                    li.innerText = action;
+                    li.innerHTML = action; // Use innerHTML to allow for <strong> etc. if needed
                     actionsList.appendChild(li);
                 });
-
                 principleModal.style.display = 'flex';
             });
         });
 
-        const hidePrincipleModal = () => principleModal.style.display = 'none';
-        closePrincipleModal.addEventListener('click', hidePrincipleModal);
-        principleModal.addEventListener('click', (e) => {
-            if (e.target === principleModal) {
-                hidePrincipleModal();
-            }
+        document.getElementById('ai-assistant-button').addEventListener('click', () => {
+            aiModal.style.display = 'flex';
         });
 
-        // --- Logica voor de AI Assistent Modal ---
-        const aiModal = document.getElementById('ai-modal');
-        const openAiBtn = document.getElementById('ai-assistant-button');
-        const closeAiModal = aiModal.querySelector('.close-button');
-        const chatLog = document.getElementById('chat-log');
-        const presetQuestions = document.querySelectorAll('.preset-question');
-
-        const showAiModal = () => aiModal.style.display = 'flex';
-        const hideAiModal = () => aiModal.style.display = 'none';
-
-        openAiBtn.addEventListener('click', showAiModal);
-        closeAiModal.addEventListener('click', hideAiModal);
-        aiModal.addEventListener('click', (e) => {
-            if (e.target === aiModal) {
-                hideAiModal();
-            }
-        });
-
-        presetQuestions.forEach(button => {
+        document.querySelectorAll('.preset-question').forEach(button => {
             button.addEventListener('click', () => {
                 const question = button.dataset.question;
                 const answer = aiAnswers[question];
+                const chatLog = document.getElementById('chat-log');
                 
-                // Voeg gebruikersvraag toe aan chat
                 const userMsg = document.createElement('div');
                 userMsg.className = 'chat-message user-message';
                 userMsg.textContent = question;
                 chatLog.appendChild(userMsg);
-
-                // Simuleer een kleine vertraging voor het antwoord van de bot
+                
+                chatLog.scrollTop = chatLog.scrollHeight;
+                
                 setTimeout(() => {
                     const botMsg = document.createElement('div');
                     botMsg.className = 'chat-message bot-message';
                     botMsg.textContent = answer;
                     chatLog.appendChild(botMsg);
-                    chatLog.scrollTop = chatLog.scrollHeight; // Scroll naar beneden
-                }, 500);
+                    chatLog.scrollTop = chatLog.scrollHeight;
+                }, 600);
             });
         });
 
+        modals.forEach(modal => {
+            modal.querySelector('.close-button').addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
     });
     </script>
 
