@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactieve Infographic: Creating Meaningful Impact</title>
+    <style>
+        /* --- Importeer Lettertypes van Google Fonts --- */
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Montserrat:wght@400;600&display=swap');
+
+        /* --- Algemene Stijlen --- */
+        :root {
+            --geel: #FFEB3B;
+            --rood: #E53935;
+            --zwart: #212121;
+            --wit: #ffffff;
+            --schaduw: rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--geel);
+            color: var(--zwart);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Hoofd Container --- */
+        .infographic-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* --- Typografie --- */
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 5rem;
+            color: var(--zwart);
+            text-shadow: 2px 2px var(--wit), 4px 4px var(--schaduw);
+            margin-bottom: 0;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+        
+        h3 strong {
+            font-weight: 600;
+        }
+
+        .intro-text {
+            max-width: 600px;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        /* --- Interactief Centrum --- */
+        .interactive-center {
+            position: relative;
+            width: 450px;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #brain-icon {
+            width: 150px;
+            height: 150px;
+            opacity: 0.7;
+        }
+
+        .principle-icon {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background-color: var(--wit);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px var(--schaduw);
+            border: 3px solid var(--zwart);
+        }
+
+        .principle-icon:hover {
+            transform: scale(1.15);
+            box-shadow: 0 8px 25px var(--schaduw);
+        }
+
+        /* --- Positionering van de iconen in een cirkel --- */
+        #icon-1 { top: 0; left: 50%; transform: translate(-50%, -50%); }
+        #icon-2 { top: 15%; right: 0; transform: translate(50%, -50%); }
+        #icon-3 { top: 50%; right: -15%; transform: translate(50%, -50%); }
+        #icon-4 { bottom: 0; right: 15%; transform: translate(50%, 50%); }
+        #icon-5 { bottom: -15%; left: 50%; transform: translate(-50%, 50%); }
+        #icon-6 { bottom: 0; left: 0; transform: translate(-50%, 50%); }
+        #icon-7 { top: 50%; left: -15%; transform: translate(-50%, -50%); }
+        #icon-8 { top: 15%; left: 0; transform: translate(-50%, -50%); }
+
+        /* --- Modal (Pop-up) Stijlen --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: none; /* Wordt 'flex' met JS */
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: var(--wit);
+            padding: 30px 40px;
+            border-radius: 15px;
+            max-width: 650px;
+            width: 100%;
+            text-align: left;
+            position: relative;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-content h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 3rem;
+            color: var(--rood);
+            margin-bottom: 15px;
+        }
+
+        .modal-content h4 {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--geel);
+            display: inline-block;
+        }
+
+        .modal-content ul {
+            list-style-position: inside;
+            padding-left: 10px;
+        }
+        
+        .modal-content li {
+            margin-bottom: 5px;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--zwart);
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        /* --- AI Assistent --- */
+        #ai-assistant-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background-color: var(--rood);
+            color: var(--wit);
+            border-radius: 50%;
+            border: 3px solid var(--wit);
+            font-size: 2.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: transform 0.3s ease;
+        }
+        
+        #ai-assistant-button:hover {
+            transform: scale(1.1);
+        }
+
+        #chat-log {
+            height: 250px;
+            overflow-y: auto;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+
+        .chat-message {
+            margin-bottom: 12px;
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+        }
+
+        .bot-message {
+            background-color: #e9e9eb;
+            text-align: left;
+            align-self: flex-start;
+        }
+
+        .user-message {
+            background-color: var(--geel);
+            text-align: right;
+            margin-left: auto;
+        }
+
+        #preset-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .preset-question {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .preset-question:hover {
+            background-color: #ddd;
+        }
+
+        /* --- Responsiviteit --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            h3 { font-size: 1.2rem; }
+            .interactive-center { width: 300px; height: 300px; }
+            .principle-icon { width: 60px; height: 60px; font-size: 1.8rem; }
+            #ai-assistant-button { width: 60px; height: 60px; font-size: 2rem; bottom: 20px; right: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="infographic-container">
+        <h1>Creating Meaningful Impact</h1>
+        <h3>De Essentiële Gids voor een <strong>Impact-Geletterde Mindset</strong></h3>
+        <p class="intro-text">Een interactieve samenvatting van het boek van Julie Bayley. Klik op de iconen om de 8 principes te ontdekken die je helpen betekenisvolle impact te creëren.</p>
+
+        <div class="interactive-center">
+            <img id="brain-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzQyNDI0MiI+PHBhdGggZD0iTTEyIDJDOS4yMyAyIDcgNC4yMyA3IDdWMTEuNUM3IDEyLjM0IDYuMzcgMTMuMDYgNS41NCAxMy4yN0M0LjQgMTMuNTQgMy41IDE0LjUgMy41IDE1Ljc1QzMuNSAxNy41IDE3IDIzIDE3IDIxLjdWMThIMTlDMTkuNTUgMTggMjAgMTcuNTUgMjAgMTdDMTkgMTUuMDcgMTMuNSA4LjUgMTcgNy41QzE4LjUgNi41IDE4IDUgMTcgNUMxNi4yMiA1IDE1LjUgNS42NiAxNS4yOCA2LjM5QzE1LjA4IDcuMDYgMTUgNy41IDE1IDhDMTUgOS4xMSAxNC4xMSA5LjUgMTMgOS41QzEyLjcgOSA5LjUgMTEuNSAxMSAxMS4yOVY3QzExIDUuMzQgOS42NiA0IDggNEM3LjQ1IDQgNyA0LjQ1IDcgNUM4IDYgOCA4IDkgOEM5IDguNTUgOS40NSA5IDEwIDlDMTMC4NTUgOSAxMSA4LjU1IDExIDhDMTEgNy41IDEwLjgzIDcuMSA5LjUgNi41QzkgNS41IDguNSA1IDcuNSA1QzcgMy41IDEwIDIgMTIgMlpNNiAxN0M2IDE5IDQgMjAgNSA1QzIgMTAgNCAxNiA2IDE3WiIvPjwvc3ZnPg==" alt="Brain icon">
+            <div class="principle-icon" id="icon-1" data-principle="1">🚫🦄</div>
+            <div class="principle-icon" id="icon-2" data-principle="2">✨🔫</div>
+            <div class="principle-icon" id="icon-3" data-principle="3">➡️</div>
+            <div class="principle-icon" id="icon-4" data-principle="4">✒️❓</div>
+            <div class="principle-icon" id="icon-5" data-principle="5">🏡</div>
+            <div class="principle-icon" id="icon-6" data-principle="6">🤓</div>
+            <div class="principle-icon" id="icon-7" data-principle="7">🗼</div>
+            <div class="principle-icon" id="icon-8" data-principle="8">😊</div>
+        </div>
+    </div>
+
+    <!-- Modal voor de principes -->
+    <div id="principle-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-button">×</button>
+            <h2 id="modal-title"></h2>
+            <h4>De Kern</h4>
+            <p id="modal-core"></p>
+            <h4>Wat kun je doen?</h4>
+            <ul id="modal-actions"></ul>
+        </div>
+    </div>
+
+    <!-- Knop en Modal voor de AI Assistent -->
+    <button id="ai-assistant-button">💬</button>
+    <div id="ai-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-button">×</button>
+            <h2>Julie's Impact-Hulp</h2>
+            <p>Hoi! Ik ben een AI-assistent, getraind op het boek van Julie Bayley. Stel een vraag of klik op een suggestie.</p>
+            <div id="chat-log">
+                <div class="chat-message bot-message">Waarmee kan ik je helpen?</div>
+            </div>
+            <div id="preset-questions">
+                <button class="preset-question" data-question="Wat is impact-geletterdheid?">Wat is impact-geletterdheid?</button>
+                <button class="preset-question" data-question="Hoe kan ik impact hebben met fundamenteel onderzoek?">Impact met fundamenteel onderzoek?</button>
+                <button class="preset-question" data-question="Wat bedoelt ze met een 'vuurtoren'?">Wat is een 'vuurtoren'?</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- Data voor de principes ---
+        const principleData = {
+            1: {
+                title: "Jaag op Betekenis, Niet op Eenhoorns",
+                core: "Focus niet op onrealistische, mythische 'perfecte' impact. Richt je op de echte, haalbare en betekenisvolle verandering die jouw onderzoek kan teweegbrengen. Het gaat om wat echt waarde toevoegt, niet om een vlekkeloos sprookje.",
+                actions: [
+                    "Wees realistisch over wat je kunt bereiken.",
+                    "Vraag jezelf af: 'Hoe ziet *beter* eruit in de praktijk?'",
+                    "Gebruik de creatieve energie van 'eenhoorn-denken', maar blijf met beide benen op de grond."
+                ]
+            },
+            2: {
+                title: "Ontdek Waar Jouw Onderzoek Kracht aan Geeft",
+                core: "Identificeer de specifieke kennis, inzichten, tools of data uit jouw onderzoek die anderen kunnen gebruiken. Wie pakt het 'stokje' (de baton) van jou over om verandering te realiseren? Jouw onderzoek is het 'glitterkanon' dat de munitie levert.",
+                actions: [
+                    "Bedenk wie je partners kunnen zijn (beleidsmakers, bedrijven, burgers).",
+                    "Wees een 'vervelende peuter': blijf 'Waarom?' vragen om tot de kern van de waarde te komen.",
+                    "Denk na over de beste manier om de 'baton' door te geven."
+                ]
+            },
+            3: {
+                title: "Denk Richtinggevend, Niet Lineair",
+                core: "Impact is zelden een rechte lijn van A naar B. Het is een complex proces met zijwegen, omwegen en onverwachte wendingen. Focus op de algemene richting die je op wilt, in plaats van een rigide, vooraf bepaald pad.",
+                actions: [
+                    "Beschrijf de beginsituatie ('het probleem') en het doel ('hoe ziet beter eruit?').",
+                    "Wees flexibel in de route die je neemt om van het probleem naar de oplossing te komen.",
+                    "Evalueer en stuur bij gedurende het proces."
+                ]
+            },
+            4: {
+                title: "Bewijs? Denk 'Wat Zou Jessica Fletcher Doen?'",
+                core: "Bewijs verzamelen voor impact is als detectivewerk. Een enkel bewijsstuk is vaak niet genoeg. Bouw een overtuigende zaak op door verschillende soorten bewijs te combineren: hard, zacht, logisch en indirect.",
+                actions: [
+                    "Verzamel getuigenissen, statistieken, beleidsdocumenten en media-aandacht.",
+                    "Gebruik belangrijke gebeurtenissen (een publicatie, een workshop) als 'waypoints' om bewijs te verzamelen.",
+                    "Combineer kwalitatieve verhalen met kwantitatieve data."
+                ]
+            },
+            5: {
+                title: "Creëer een Gezonde Ruimte",
+                core: "Een ondersteunende, veilige en gezonde onderzoeksomgeving is cruciaal voor impact. Een cultuur van angst, overmatige competitie of gebrek aan erkenning verstikt creativiteit en de wil om risico's te nemen die nodig zijn voor impact.",
+                actions: [
+                    "Werk aan de '5 C's': Clarity (duidelijkheid), Capacity (capaciteit), Culture (cultuur), Connectivity (verbinding) en Capability (bekwaamheid).",
+                    "Wees je bewust van machtsdynamiek en privileges.",
+                    "Praat openlijk over mislukkingen en wat je ervan leert."
+                ]
+            },
+            6: {
+                title: "Omarm je Expertise, maar wees geen Hork",
+                core: "Wees zelfverzekerd over je kennis en de waarde ervan, maar communiceer op een toegankelijke, respectvolle en nederige manier. Niemand luistert naar een arrogante expert. Echte impact ontstaat door dialoog en samenwerking.",
+                actions: [
+                    "Deel je expertise royaal en vermijd onnodig jargon.",
+                    "Luister actief naar de kennis en ervaring van je partners.",
+                    "Erken dat jij niet alle antwoorden hebt."
+                ]
+            },
+            7: {
+                title: "Wees een Impact-Vuurtoren",
+                core: "Jouw rol als onderzoeker is om licht te schijnen op belangrijke zaken. Net als een vuurtoren verlicht je het probleem, de mogelijke oplossingen en de weg vooruit voor anderen die moeten navigeren.",
+                actions: [
+                    "Bepaal *wat* je wilt verlichten (het probleem, data, een oplossing).",
+                    "Kies zorgvuldig *wanneer* en *waar* je je licht schijnt voor maximaal effect.",
+                    "Jouw rol is niet altijd om de hele reis te maken, maar om de weg te wijzen."
+                ]
+            },
+            8: {
+                title: "Wees Jezelf",
+                core: "Authenticiteit is je grootste kracht. Jouw unieke passie, stijl en persoonlijkheid maken je impact-verhaal geloofwaardig en overtuigend. Probeer geen kopie te zijn van iemand anders; jouw eigen aanpak is het meest waardevol.",
+                actions: [
+                    "Vind de aspecten van impact waar jij persoonlijk energie van krijgt.",
+                    "Verbind je persoonlijke waarden met je professionele doelen.",
+                    "Wees niet bang om je persoonlijkheid te laten zien in je werk."
+                ]
+            }
+        };
+
+        // --- Mock AI Antwoorden ---
+        const aiAnswers = {
+            "Wat is impact-geletterdheid?": "Impact-geletterdheid is de kennis, vaardigheid en het vertrouwen om betekenisvolle impact te plannen, te bewijzen en te realiseren. Het gaat niet alleen om 'doen', maar om het strategisch *denken* over hoe je onderzoek een verschil kan maken.",
+            "Hoe kan ik impact hebben met fundamenteel onderzoek?": "Zeker! Fundamenteel onderzoek legt de basis voor toekomstige toepassingen. De impact zit vaak in het 'kracht geven' aan andere onderzoekers (Principe 2), het veranderen van denkwijzen binnen een veld, of het inspireren van een nieuwe generatie wetenschappers. Het is vaak een langetermijnspel.",
+            "Wat bedoelt ze met een 'vuurtoren'?": "Het 'vuurtoren'-principe (Principe 7) betekent dat jouw rol als onderzoeker is om licht te schijnen op een probleem of een oplossing. Je hoeft niet zelf de boot te besturen, maar je geeft anderen de cruciale informatie om veilig te navigeren. Je verlicht de weg."
+        };
+
+        // --- Logica voor de Principe Modal ---
+        const principleModal = document.getElementById('principle-modal');
+        const principleIcons = document.querySelectorAll('.principle-icon');
+        const closePrincipleModal = principleModal.querySelector('.close-button');
+
+        principleIcons.forEach(icon => {
+            icon.addEventListener('click', () => {
+                const principleId = icon.dataset.principle;
+                const data = principleData[principleId];
+
+                document.getElementById('modal-title').innerText = data.title;
+                document.getElementById('modal-core').innerText = data.core;
+                
+                const actionsList = document.getElementById('modal-actions');
+                actionsList.innerHTML = ''; // Leegmaken voor nieuwe inhoud
+                data.actions.forEach(action => {
+                    const li = document.createElement('li');
+                    li.innerText = action;
+                    actionsList.appendChild(li);
+                });
+
+                principleModal.style.display = 'flex';
+            });
+        });
+
+        const hidePrincipleModal = () => principleModal.style.display = 'none';
+        closePrincipleModal.addEventListener('click', hidePrincipleModal);
+        principleModal.addEventListener('click', (e) => {
+            if (e.target === principleModal) {
+                hidePrincipleModal();
+            }
+        });
+
+        // --- Logica voor de AI Assistent Modal ---
+        const aiModal = document.getElementById('ai-modal');
+        const openAiBtn = document.getElementById('ai-assistant-button');
+        const closeAiModal = aiModal.querySelector('.close-button');
+        const chatLog = document.getElementById('chat-log');
+        const presetQuestions = document.querySelectorAll('.preset-question');
+
+        const showAiModal = () => aiModal.style.display = 'flex';
+        const hideAiModal = () => aiModal.style.display = 'none';
+
+        openAiBtn.addEventListener('click', showAiModal);
+        closeAiModal.addEventListener('click', hideAiModal);
+        aiModal.addEventListener('click', (e) => {
+            if (e.target === aiModal) {
+                hideAiModal();
+            }
+        });
+
+        presetQuestions.forEach(button => {
+            button.addEventListener('click', () => {
+                const question = button.dataset.question;
+                const answer = aiAnswers[question];
+                
+                // Voeg gebruikersvraag toe aan chat
+                const userMsg = document.createElement('div');
+                userMsg.className = 'chat-message user-message';
+                userMsg.textContent = question;
+                chatLog.appendChild(userMsg);
+
+                // Simuleer een kleine vertraging voor het antwoord van de bot
+                setTimeout(() => {
+                    const botMsg = document.createElement('div');
+                    botMsg.className = 'chat-message bot-message';
+                    botMsg.textContent = answer;
+                    chatLog.appendChild(botMsg);
+                    chatLog.scrollTop = chatLog.scrollHeight; // Scroll naar beneden
+                }, 500);
+            });
+        });
+
+    });
+    </script>
+
+</body>
+</html>
