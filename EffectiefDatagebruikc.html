@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficiënt Datagebruik - Interactieve Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        secondary: '#4F46E5'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .ai-chat {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .typing-indicator {
+            display: none;
+        }
+        .typing-indicator.show {
+            display: flex;
+        }
+        @keyframes pulse {
+            0%, 20% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .dot {
+            animation: pulse 1.5s infinite;
+        }
+        .dot:nth-child(2) { animation-delay: 0.1s; }
+        .dot:nth-child(3) { animation-delay: 0.2s; }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Dark mode setup -->
+    <script>
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+
+    <!-- Header -->
+    <header class="bg-primary text-white p-6">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">Efficiënt Datagebruik</h1>
+            <p class="text-lg opacity-90">Interpreteren en benutten van data door onderwijsteams</p>
+            <p class="text-sm opacity-75 mt-1">Stichting Kwaliteitsnetwerk MBO</p>
+        </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto p-6">
+        <!-- Navigation -->
+        <nav class="mb-8">
+            <div class="flex flex-wrap gap-4 justify-center">
+                <button onclick="scrollToSection('uitgangspunten')" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-primary hover:text-white transition-colors">
+                    7 Uitgangspunten
+                </button>
+                <button onclick="scrollToSection('methodiek')" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-primary hover:text-white transition-colors">
+                    Methodiek
+                </button>
+                <button onclick="scrollToSection('casussen')" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-primary hover:text-white transition-colors">
+                    Casussen
+                </button>
+                <button onclick="scrollToSection('ai-assistent')" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-primary hover:text-white transition-colors">
+                    AI-Assistent
+                </button>
+            </div>
+        </nav>
+
+        <!-- Introductie -->
+        <section class="mb-12 bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
+            <h2 class="text-2xl font-bold mb-4 text-primary">Waarom deze Handreiking?</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3">?</div>
+                    <h3 class="font-semibold mb-2">Uitdaging</h3>
+                    <p class="text-sm">MBO-instellingen vinden het omzetten van informatie naar verbeteracties lastig</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3">💡</div>
+                    <h3 class="font-semibold mb-2">Oplossing</h3>
+                    <p class="text-sm">Methodiek om van data tot inzicht en gerichte interventies te komen</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3">🎯</div>
+                    <h3 class="font-semibold mb-2">Doel</h3>
+                    <p class="text-sm">Het beste voor studenten, onderwijsteam als spil</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7 Uitgangspunten -->
+        <section id="uitgangspunten" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-center">7 Uitgangspunten</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 p-6 rounded-xl">
+                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-300 mb-2">1</div>
+                    <h3 class="font-semibold mb-2">Het beste voor studenten</h3>
+                    <p class="text-sm">Het onderwijsteam is hierbij de spil</p>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 p-6 rounded-xl">
+                    <div class="text-2xl font-bold text-green-600 dark:text-green-300 mb-2">2</div>
+                    <h3 class="font-semibold mb-2">Zichtbare onderwijsvisie</h3>
+                    <p class="text-sm">Merkbaar in onderwijs, lesgeven en begeleiding</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900 dark:to-purple-800 p-6 rounded-xl">
+                    <div class="text-2xl font-bold text-purple-600 dark:text-purple-300 mb-2">3</div>
+                    <h3 class="font-semibold mb-2">Gezamenlijke verantwoordelijkheid</h3>
+                    <p class="text-sm">Voor ontwikkeling en succes van studenten</p>
+                </div>
+                <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900 dark:to-yellow-800 p-6 rounded-xl">
+                    <div class="text-2xl font-bold text-yellow-600 dark:text-yellow-300 mb-2">4</div>
+                    <h3 class="font-semibold mb-2">Meten is weten</h3>
+                    <p class="text-sm">Goed zicht op cijfers: VSV, uitval, doorstroom</p>
+                </div>
+                <div class="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900 dark:to-red-800 p-6 rounded-xl">
+                    <div class="text-2xl font-bold text-red-600 dark:text-red-300 mb-2">5</div>
+                    <h3 class="font-semibold mb-2">Meer dan cijfers</h3>
+                    <p class="text-sm">Inzicht in het verhaal achter de cijfers</p>
+                </div>
+                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900 dark:to-indigo-800 p-6 rounded-xl">
+                    <div class="text-2xl font-bold text-indigo-600 dark:text-indigo-300 mb-2">6</div>
+                    <h3 class="font-semibold mb-2">Integrale aanpak</h3>
+                    <p class="text-sm">Gebaseerd op gezamenlijke visie</p>
+                </div>
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900 dark:to-pink-800 p-6 rounded-xl md:col-span-2 lg:col-span-1">
+                    <div class="text-2xl font-bold text-pink-600 dark:text-pink-300 mb-2">7</div>
+                    <h3 class="font-semibold mb-2">Evidence informed</h3>
+                    <p class="text-sm">Oplossingen gebaseerd op bewezen praktijk</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Methodiek: 7 Stappen -->
+        <section id="methodiek" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-center">Stappenplan Datagebruik</h2>
+            <div class="space-y-6">
+                <div class="flex flex-col lg:flex-row gap-6">
+                    <div class="lg:w-1/3">
+                        <div class="bg-gradient-to-r from-primary to-secondary text-white p-6 rounded-xl sticky top-6">
+                            <h3 class="text-xl font-bold mb-4">Interactieve Stappenplan</h3>
+                            <p class="mb-4">Klik op een stap om meer details te zien</p>
+                            <div class="text-sm opacity-90">
+                                <p>💡 <strong>Tip:</strong> Volg de stappen systematisch voor het beste resultaat</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-2/3 space-y-4">
+                        <div class="step-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 cursor-pointer" onclick="toggleStep(1)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mr-4">1</div>
+                                    <h3 class="text-lg font-semibold">Bepaal de aanleiding</h3>
+                                </div>
+                                <span id="arrow-1" class="text-gray-500 transform transition-transform">▼</span>
+                            </div>
+                            <div id="content-1" class="mt-4 hidden">
+                                <p class="text-gray-600 dark:text-gray-300 mb-3">Waarom wil je als onderwijsteam data gaan gebruiken?</p>
+                                <div class="grid md:grid-cols-3 gap-4">
+                                    <div class="bg-blue-50 dark:bg-blue-900 p-3 rounded">
+                                        <h4 class="font-semibold text-blue-800 dark:text-blue-200">Operationeel</h4>
+                                        <p class="text-sm text-blue-600 dark:text-blue-300">Dagelijkse sturing van het team</p>
+                                    </div>
+                                    <div class="bg-green-50 dark:bg-green-900 p-3 rounded">
+                                        <h4 class="font-semibold text-green-800 dark:text-green-200">Verantwoorden</h4>
+                                        <p class="text-sm text-green-600 dark:text-green-300">Naar management en bestuur</p>
+                                    </div>
+                                    <div class="bg-purple-50 dark:bg-purple-900 p-3 rounded">
+                                        <h4 class="font-semibold text-purple-800 dark:text-purple-200">Verbeteren</h4>
+                                        <p class="text-sm text-purple-600 dark:text-purple-300">Onderwijsproces optimaliseren</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 cursor-pointer" onclick="toggleStep(2)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mr-4">2</div>
+                                    <h3 class="text-lg font-semibold">Organiseer teamgesprek</h3>
+                                </div>
+                                <span id="arrow-2" class="text-gray-500 transform transition-transform">▼</span>
+                            </div>
+                            <div id="content-2" class="mt-4 hidden">
+                                <p class="text-gray-600 dark:text-gray-300 mb-3">Ga na welke beïnvloedbare factoren er zijn</p>
+                                <div class="bg-yellow-50 dark:bg-yellow-900 p-4 rounded-lg">
+                                    <h4 class="font-semibold mb-2">Focus op:</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-sm">
+                                        <li>Factoren die je wel kunt beïnvloeden</li>
+                                        <li>Factoren die je niet kunt beïnvloeden</li>
+                                        <li>Gezamenlijke analyse van het handelen</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 cursor-pointer" onclick="toggleStep(3)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mr-4">3</div>
+                                    <h3 class="text-lg font-semibold">Verzamel gegevens</h3>
+                                </div>
+                                <span id="arrow-3" class="text-gray-500 transform transition-transform">▼</span>
+                            </div>
+                            <div id="content-3" class="mt-4 hidden">
+                                <p class="text-gray-600 dark:text-gray-300 mb-3">Relevante en betrouwbare data om factoren te onderzoeken</p>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                        <h4 class="font-semibold">Kwantitatieve data</h4>
+                                        <p class="text-sm">Cijfers, statistieken, metingen</p>
+                                    </div>
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                        <h4 class="font-semibold">Kwalitatieve data</h4>
+                                        <p class="text-sm">Gesprekken, observaties, evaluaties</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 cursor-pointer" onclick="toggleStep(4)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mr-4">4</div>
+                                    <h3 class="text-lg font-semibold">Interpreteer gegevens</h3>
+                                </div>
+                                <span id="arrow-4" class="text-gray-500 transform transition-transform">▼</span>
+                            </div>
+                            <div id="content-4" class="mt-4 hidden">
+                                <p class="text-gray-600 dark:text-gray-300 mb-3">Genereer aannemelijke en geloofwaardige interpretaties</p>
+                                <div class="bg-red-50 dark:bg-red-900 p-4 rounded-lg">
+                                    <h4 class="font-semibold mb-2">Belangrijke vragen:</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-sm">
+                                        <li>Welke factoren zijn beïnvloedbaar?</li>
+                                        <li>Hoe zijn ze beïnvloedbaar?</li>
+                                        <li>Wat is het verhaal achter de cijfers?</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 cursor-pointer" onclick="toggleStep(5)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mr-4">5</div>
+                                    <h3 class="text-lg font-semibold">Beslis en plan</h3>
+                                </div>
+                                <span id="arrow-5" class="text-gray-500 transform transition-transform">▼</span>
+                            </div>
+                            <div id="content-5" class="mt-4 hidden">
+                                <p class="text-gray-600 dark:text-gray-300 mb-3">Bepaal welke oorzaak relevant en urgent is</p>
+                                <div class="space-y-3">
+                                    <div class="bg-green-50 dark:bg-green-900 p-3 rounded">
+                                        <h4 class="font-semibold">Met stakeholders:</h4>
+                                        <p class="text-sm">Bepaal gewenste resultaat</p>
+                                    </div>
+                                    <div class="bg-blue-50 dark:bg-blue-900 p-3 rounded">
+                                        <h4 class="font-semibold">Selecteer interventies:</h4>
+                                        <p class="text-sm">Geschikt om resultaat te behalen</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 cursor-pointer" onclick="toggleStep(6)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mr-4">6</div>
+                                    <h3 class="text-lg font-semibold">Implementeer</h3>
+                                </div>
+                                <span id="arrow-6" class="text-gray-500 transform transition-transform">▼</span>
+                            </div>
+                            <div id="content-6" class="mt-4 hidden">
+                                <p class="text-gray-600 dark:text-gray-300 mb-3">Voer interventies in het onderwijs in</p>
+                                <div class="bg-purple-50 dark:bg-purple-900 p-4 rounded-lg">
+                                    <h4 class="font-semibold mb-2">Aandachtspunten:</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-sm">
+                                        <li>Kort-cyclische interventies voor snel resultaat</li>
+                                        <li>Verhoogt betrokkenheid docenten</li>
+                                        <li>Systematische invoering</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 cursor-pointer" onclick="toggleStep(7)">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold mr-4">7</div>
+                                    <h3 class="text-lg font-semibold">Evalueer</h3>
+                                </div>
+                                <span id="arrow-7" class="text-gray-500 transform transition-transform">▼</span>
+                            </div>
+                            <div id="content-7" class="mt-4 hidden">
+                                <p class="text-gray-600 dark:text-gray-300 mb-3">Evalueer interventies samen met stakeholders</p>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="bg-green-50 dark:bg-green-900 p-3 rounded">
+                                        <h4 class="font-semibold text-green-800 dark:text-green-200">Resultaten behaald?</h4>
+                                        <p class="text-sm text-green-600 dark:text-green-300">→ Bredere implementatie</p>
+                                    </div>
+                                    <div class="bg-orange-50 dark:bg-orange-900 p-3 rounded">
+                                        <h4 class="font-semibold text-orange-800 dark:text-orange-200">Resultaten niet behaald?</h4>
+                                        <p class="text-sm text-orange-600 dark:text-orange-300">→ Analyse waarom niet</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Casussen -->
+        <section id="casussen" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-center">Praktijkcasussen</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-blue-50 dark:bg-blue-900 p-6 rounded-xl">
+                    <h3 class="text-xl font-bold mb-4 text-blue-800 dark:text-blue-200">Casus 1: Startersresultaat</h3>
+                    <div class="mb-4">
+                        <div class="bg-white dark:bg-blue-800 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2">Definitie:</h4>
+                            <p class="text-sm">Aandeel nieuwe instromers (niveau 2+) dat een jaar later nog studeert of is gediplomeerd</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="bg-blue-100 dark:bg-blue-800 p-3 rounded">
+                            <h4 class="font-semibold">Context:</h4>
+                            <p class="text-sm">Opleiding Financiële dienstverlener niveau 3</p>
+                            <p class="text-sm">Startersresultaat: 75% (norm: 82%)</p>
+                        </div>
+                        <div class="bg-blue-100 dark:bg-blue-800 p-3 rounded">
+                            <h4 class="font-semibold">Hypotheses:</h4>
+                            <ul class="text-sm list-disc list-inside">
+                                <li>Toename multiproblematiek</li>
+                                <li>Onderwijs sluit niet aan</li>
+                                <li>Verkeerde studiekeuze</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-green-50 dark:bg-green-900 p-6 rounded-xl">
+                    <h3 class="text-xl font-bold mb-4 text-green-800 dark:text-green-200">Casus 2: Jaarresultaat</h3>
+                    <div class="mb-4">
+                        <div class="bg-white dark:bg-green-800 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2">Definitie:</h4>
+                            <p class="text-sm">Percentage gediplomeerde studenten t.o.v. alle instellingsverlaters en gediplomeerde doorstromers</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="bg-green-100 dark:bg-green-800 p-3 rounded">
+                            <h4 class="font-semibold">Context:</h4>
+                            <p class="text-sm">ROC voor de Regio - 14 docenten, 6 opleidingen</p>
+                            <p class="text-sm">Dalende trend Jaarresultaat</p>
+                        </div>
+                        <div class="bg-green-100 dark:bg-green-800 p-3 rounded">
+                            <h4 class="font-semibold">Analyses:</h4>
+                            <ul class="text-sm list-disc list-inside">
+                                <li>Teamkenmerken</li>
+                                <li>Stakeholders betrekken</li>
+                                <li>Data-infrastructuur</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Assistant Section -->
+        <section id="ai-assistent" class="mb-12">
+            <div class="bg-gradient-to-r from-primary to-secondary text-white p-8 rounded-xl">
+                <h2 class="text-3xl font-bold mb-4 text-center">🤖 AI-Assistent Datagebruik</h2>
+                <p class="text-center text-lg opacity-90 mb-6">Stel vragen over de handreiking en krijg direct antwoord!</p>
+                
+                <div class="max-w-4xl mx-auto">
+                    <!-- Chat Interface -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 text-gray-800 dark:text-gray-200">
+                        <div id="chatContainer" class="ai-chat space-y-4 mb-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">🤖</div>
+                                <div class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg max-w-md">
+                                    <p class="text-sm">Hallo! Ik ben je AI-assistent voor de handreiking Efficiënt Datagebruik. Stel me vragen over:</p>
+                                    <ul class="text-sm mt-2 list-disc list-inside">
+                                        <li>Het 7-stappenplan</li>
+                                        <li>Uitgangspunten en randvoorwaarden</li>
+                                        <li>Praktijkcasussen</li>
+                                        <li>Implementatie tips</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Questions -->
+                        <div class="mb-4">
+                            <p class="text-sm font-semibold mb-2">Veelgestelde vragen:</p>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="askQuickQuestion('Wat zijn de 7 uitgangspunten?')" 
+                                        class="text-xs px-3 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-full hover:bg-blue-200 dark:hover:bg-blue-700 transition-colors">
+                                    7 uitgangspunten
+                                </button>
+                                <button onclick="askQuickQuestion('Leg het 7-stappenplan uit')" 
+                                        class="text-xs px-3 py-1 bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 rounded-full hover:bg-green-200 dark:hover:bg-green-700 transition-colors">
+                                    7-stappenplan
+                                </button>
+                                <button onclick="askQuickQuestion('Wat is het verschil tussen Startersresultaat en Jaarresultaat?')" 
+                                        class="text-xs px-3 py-1 bg-purple-100 dark:bg-purple-800 text-purple-800 dark:text-purple-200 rounded-full hover:bg-purple-200 dark:hover:bg-purple-700 transition-colors">
+                                    Startersresultaat vs Jaarresultaat
+                                </button>
+                                <button onclick="askQuickQuestion('Welke randvoorwaarden zijn belangrijk?')" 
+                                        class="text-xs px-3 py-1 bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-200 rounded-full hover:bg-orange-200 dark:hover:bg-orange-700 transition-colors">
+                                    Randvoorwaarden
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Input Area -->
+                        <div class="flex space-x-3">
+                            <input type="text" id="userInput" placeholder="Stel je vraag over datagebruik..." 
+                                   class="flex-1 p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-base focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <button onclick="sendMessage()" 
+                                    class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary transition-colors font-semibold">
+                                Verstuur
+                            </button>
+                        </div>
+                        
+                        <!-- Typing Indicator -->
+                        <div id="typingIndicator" class="typing-indicator items-center space-x-3 mt-4">
+                            <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">🤖</div>
+                            <div class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-gray-500 rounded-full dot"></div>
+                                    <div class="w-2 h-2 bg-gray-500 rounded-full dot"></div>
+                                    <div class="w-2 h-2 bg-gray-500 rounded-full dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-6 mt-12">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="mb-2">© 2021 Stichting Kwaliteitsnetwerk MBO</p>
+            <p class="text-sm opacity-75">Handreiking Efficiënt Datagebruik - Interpreteren en benutten van data door onderwijsteams</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Poe AI handlers
+        if (window.Poe) {
+            window.Poe.registerHandler("datagebruik-handler", (result, context) => {
+                const msg = result.responses[0];
+                
+                if (msg.status === "error") {
+                    addAIMessage("Sorry, er is een fout opgetreden: " + (msg.statusText || "Onbekende fout"));
+                } else if (msg.status === "incomplete") {
+                    // Update the last AI message with streaming content
+                    updateLastAIMessage(msg.content);
+                } else if (msg.status === "complete") {
+                    // Ensure the final content is displayed
+                    updateLastAIMessage(msg.content);
+                }
+                
+                // Hide typing indicator when done
+                if (msg.status === "complete" || msg.status === "error") {
+                    hideTypingIndicator();
+                }
+            });
+        }
+
+        // Utility functions
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        function toggleStep(stepNumber) {
+            const content = document.getElementById(`content-${stepNumber}`);
+            const arrow = document.getElementById(`arrow-${stepNumber}`);
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function askQuickQuestion(question) {
+            document.getElementById('userInput').value = question;
+            sendMessage();
+        }
+
+        function addUserMessage(message) {
+            const chatContainer = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex items-start space-x-3 justify-end';
+            messageDiv.innerHTML = `
+                <div class="bg-primary text-white p-3 rounded-lg max-w-md text-right">
+                    <p class="text-sm">${message}</p>
+                </div>
+                <div class="w-8 h-8 bg-gray-500 text-white rounded-full flex items-center justify-center text-sm font-bold">U</div>
+            `;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function addAIMessage(message) {
+            const chatContainer = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex items-start space-x-3';
+            messageDiv.innerHTML = `
+                <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">🤖</div>
+                <div class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg max-w-md">
+                    <div class="text-sm ai-response">${marked.parse(message)}</div>
+                </div>
+            `;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            return messageDiv;
+        }
+
+        function updateLastAIMessage(content) {
+            const chatContainer = document.getElementById('chatContainer');
+            const lastAIMessage = chatContainer.querySelector('.ai-response:last-of-type');
+            if (lastAIMessage) {
+                lastAIMessage.innerHTML = marked.parse(content);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+        }
+
+        function showTypingIndicator() {
+            document.getElementById('typingIndicator').classList.add('show');
+        }
+
+        function hideTypingIndicator() {
+            document.getElementById('typingIndicator').classList.remove('show');
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message to chat
+            addUserMessage(message);
+            input.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Add empty AI message that will be updated with streaming content
+            addAIMessage('');
+            
+            try {
+                const prompt = `Je bent een AI-assistent die vragen beantwoordt over de handreiking "Efficiënt Datagebruik" van Stichting Kwaliteitsnetwerk MBO. 
+
+Belangrijkste informatie uit de handreiking:
+
+**7 Uitgangspunten:**
+1. Het beste voor studenten, onderwijsteam als spil
+2. Zichtbare en merkbare onderwijsvisie 
+3. Gezamenlijke verantwoordelijkheid voor studentsucces
+4. Meten is weten - goed zicht op cijfers (VSV, uitval, doorstroom)
+5. Studiesucces is meer dan cijfers - verhaal achter cijfers
+6. Integrale aanpak gebaseerd op gezamenlijke visie
+7. Evidence informed oplossingen
+
+**7-Stappenplan Datagebruik:**
+1. Bepaal aanleiding (operationeel/verantwoorden/verbeteren)
+2. Organiseer teamgesprek over beïnvloedbare factoren
+3. Verzamel relevante en betrouwbare gegevens
+4. Genereer aannemelijke interpretaties
+5. Beslis welke oorzaak relevant en urgent is
+6. Implementeer interventies in onderwijs
+7. Evalueer interventies samen met stakeholders
+
+**Randvoorwaarden:**
+- Data: correct, consistent, volledig, tijdig, toegankelijk
+- Team: kennis/expertise, gesprekscompleetentie
+- Ondersteuning: relevante data, analyse-ondersteuning
+
+**Casussen:**
+- Startersresultaat: aandeel nieuwe instromers dat jaar later nog studeert/gediplomeerd
+- Jaarresultaat: percentage gediplomeerden t.o.v. alle uitstromers
+
+Beantwoord de volgende vraag op basis van deze informatie: ${message}
+
+Geef een helder, praktisch antwoord in het Nederlands. Gebruik voorbeelden uit de handreiking waar relevant.`;
+
+                if (window.Poe) {
+                    await window.Poe.sendUserMessage(`@Claude-Sonnet-4 ${prompt}`, {
+                        handler: "datagebruik-handler",
+                        stream: true,
+                        openChat: false
+                    });
+                } else {
+                    // Fallback response when Poe API is not available
+                    hideTypingIndicator();
+                    updateLastAIMessage("Sorry, de AI-assistent is momenteel niet beschikbaar. Probeer het later opnieuw.");
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+                hideTypingIndicator();
+                updateLastAIMessage("Er is een fout opgetreden bij het versturen van je bericht. Probeer het opnieuw.");
+            }
+        }
+
+        // Allow Enter key to send message
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
