@@ -18,4 +18,4 @@
 
 [Effectief datagebruik](https://paulomoekotte.github.io/Indicatoren/EffectiefDatagebruik.html)
 
-[Effectief datagebruik - GenSpark](https://paulomoekotte.github.io/Indicatoren/EffectiefDatagebruik versie b.html)
+[Effectief datagebruik - GenSpark](https://paulomoekotte.github.io/Indicatoren/EffectiefDatagebruikb.html)
