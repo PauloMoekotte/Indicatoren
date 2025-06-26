@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficiënt Datagebruik in het MBO - Interactieve Handreiking</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .step-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid #3b82f6;
+        }
+        .step-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .principle-card {
+            background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+            border-left: 4px solid #10b981;
+        }
+        .case-study {
+            background: linear-gradient(45deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+        }
+        .chat-message {
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .chat-user {
+            background: #3b82f6;
+            color: white;
+            margin-left: auto;
+        }
+        .chat-ai {
+            background: #e5e7eb;
+            color: #374151;
+        }
+        .methodology-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        @media (min-width: 1024px) {
+            .methodology-flow {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .methodology-flow .step-card {
+                flex: 0 1 calc(50% - 1rem);
+            }
+        }
+        .floating-nav {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Floating Navigation -->
+    <div class="floating-nav hidden lg:block">
+        <nav class="space-y-2">
+            <a href="#intro" class="block text-sm text-blue-600 hover:text-blue-800"><i class="fas fa-home mr-2"></i>Intro</a>
+            <a href="#principles" class="block text-sm text-blue-600 hover:text-blue-800"><i class="fas fa-lightbulb mr-2"></i>Uitgangspunten</a>
+            <a href="#methodology" class="block text-sm text-blue-600 hover:text-blue-800"><i class="fas fa-cogs mr-2"></i>Methodiek</a>
+            <a href="#cases" class="block text-sm text-blue-600 hover:text-blue-800"><i class="fas fa-file-alt mr-2"></i>Casussen</a>
+            <a href="#assistant" class="block text-sm text-blue-600 hover:text-blue-800"><i class="fas fa-robot mr-2"></i>AI Assistent</a>
+        </nav>
+    </div>
+
+    <!-- Header -->
+    <header class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                <i class="fas fa-chart-line mr-4"></i>Efficiënt Datagebruik
+            </h1>
+            <p class="text-xl md:text-2xl mb-8">Interpreteren en benutten van data door onderwijsteams</p>
+            <div class="bg-white bg-opacity-20 rounded-lg p-6 max-w-2xl mx-auto">
+                <p class="text-lg">Stichting Kwaliteitsnetwerk MBO</p>
+                <p class="text-sm mt-2">Praktische methodiek voor datagedreven onderwijsverbetering</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Introduction Section -->
+    <section id="intro" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+                    <i class="fas fa-info-circle text-blue-600 mr-3"></i>Waarom deze Handreiking?
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4 text-blue-800">
+                            <i class="fas fa-question-circle mr-2"></i>Uitdagingen
+                        </h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li><i class="fas fa-chevron-right text-blue-500 mr-2"></i>Omzetten van informatie naar verbeteracties is lastig</li>
+                            <li><i class="fas fa-chevron-right text-blue-500 mr-2"></i>Bepalen welke interventies de meeste impact hebben</li>
+                            <li><i class="fas fa-chevron-right text-blue-500 mr-2"></i>Verbanden leggen tussen verschillende datasets</li>
+                            <li><i class="fas fa-chevron-right text-blue-500 mr-2"></i>Data inzetten voor onderwijskwaliteitsverbetering</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4 text-green-800">
+                            <i class="fas fa-bullseye mr-2"></i>Oplossingen
+                        </h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Helder stappenplan voor datagebruik</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Van inzicht naar gerichte interventies</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Combinatie van kwantitatieve en kwalitatieve data</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Continue verbetering van het onderwijs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-12 bg-gradient-to-r from-purple-100 to-blue-100 p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">
+                        <i class="fas fa-balance-scale mr-3"></i>Data als Trigger vs. Data als Sturing
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h4 class="text-lg font-bold mb-4 text-orange-600">
+                                <i class="fas fa-bell mr-2"></i>Data als Trigger
+                            </h4>
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="bg-orange-500 text-white px-3 py-1 rounded text-sm">Data</div>
+                                <i class="fas fa-arrow-right text-gray-400"></i>
+                                <div class="bg-blue-500 text-white px-3 py-1 rounded text-sm">Analyse</div>
+                                <i class="fas fa-arrow-right text-gray-400"></i>
+                                <div class="bg-green-500 text-white px-3 py-1 rounded text-sm">Actie</div>
+                            </div>
+                            <p class="text-sm text-gray-600">Reactief: Data worden aangeleverd en vormen startpunt voor analyse en verantwoording</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h4 class="text-lg font-bold mb-4 text-purple-600">
+                                <i class="fas fa-compass mr-2"></i>Data als Sturing
+                            </h4>
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="bg-purple-500 text-white px-3 py-1 rounded text-sm">Vraag</div>
+                                <i class="fas fa-arrow-right text-gray-400"></i>
+                                <div class="bg-blue-500 text-white px-3 py-1 rounded text-sm">Data</div>
+                                <i class="fas fa-arrow-right text-gray-400"></i>
+                                <div class="bg-green-500 text-white px-3 py-1 rounded text-sm">Innovatie</div>
+                            </div>
+                            <p class="text-sm text-gray-600">Proactief: Vanuit vraagstelling wordt data verzameld voor onderwijsvernieuwing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seven Principles -->
+    <section id="principles" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>Zeven Uitgangspunten
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="principle-card p-6 rounded-lg shadow-md">
+                    <div class="text-2xl font-bold text-green-600 mb-3">1</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Het Beste voor Studenten</h3>
+                    <p class="text-sm text-gray-600">Het onderwijsteam is de spil in het streven naar het beste voor onze studenten.</p>
+                </div>
+                <div class="principle-card p-6 rounded-lg shadow-md">
+                    <div class="text-2xl font-bold text-green-600 mb-3">2</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Zichtbare Onderwijsvisie</h3>
+                    <p class="text-sm text-gray-600">De onderwijsorganisatie heeft een onderwijsvisie die zicht- en merkbaar is in het onderwijs.</p>
+                </div>
+                <div class="principle-card p-6 rounded-lg shadow-md">
+                    <div class="text-2xl font-bold text-green-600 mb-3">3</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Gedeelde Verantwoordelijkheid</h3>
+                    <p class="text-sm text-gray-600">Docenten dragen gezamenlijk verantwoordelijkheid voor studentensucces.</p>
+                </div>
+                <div class="principle-card p-6 rounded-lg shadow-md">
+                    <div class="text-2xl font-bold text-green-600 mb-3">4</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Meten is Weten</h3>
+                    <p class="text-sm text-gray-600">Het team heeft goed zicht op cijfers zoals uitval, doorstroom en studievertraging.</p>
+                </div>
+                <div class="principle-card p-6 rounded-lg shadow-md">
+                    <div class="text-2xl font-bold text-green-600 mb-3">5</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Meer dan Cijfers</h3>
+                    <p class="text-sm text-gray-600">Studiesucces is meer dan cijfers - inzicht in het verhaal achter de cijfers is essentieel.</p>
+                </div>
+                <div class="principle-card p-6 rounded-lg shadow-md">
+                    <div class="text-2xl font-bold text-green-600 mb-3">6</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Integrale Aanpak</h3>
+                    <p class="text-sm text-gray-600">Verbetering door integrale aanpak gebaseerd op gezamenlijke visie.</p>
+                </div>
+                <div class="principle-card p-6 rounded-lg shadow-md md:col-span-2 lg:col-span-1">
+                    <div class="text-2xl font-bold text-green-600 mb-3">7</div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Evidence Informed</h3>
+                    <p class="text-sm text-gray-600">Oplossingen zijn evidence informed en komen ten goede aan studenten.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology -->
+    <section id="methodology" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+                <i class="fas fa-cogs text-blue-600 mr-3"></i>Stappenplan Datagebruik
+            </h2>
+            
+            <!-- Main Steps -->
+            <div class="methodology-flow max-w-6xl mx-auto mb-16">
+                <div class="step-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">1</div>
+                        <h3 class="text-xl font-semibold text-gray-800">Bepaal de Aanleiding</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Waarom wil je als onderwijsteam data gebruiken?</p>
+                    <div class="grid grid-cols-3 gap-2 text-sm">
+                        <div class="bg-blue-100 p-2 rounded text-center text-blue-800">Operationeel</div>
+                        <div class="bg-green-100 p-2 rounded text-center text-green-800">Verantwoorden</div>
+                        <div class="bg-purple-100 p-2 rounded text-center text-purple-800">Verbeteren</div>
+                    </div>
+                </div>
+
+                <div class="step-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">2</div>
+                        <h3 class="text-xl font-semibold text-gray-800">Organiseer Teamgesprek</h3>
+                    </div>
+                    <p class="text-gray-600">Ga na welke beïnvloedbare factoren er zijn en bespreek deze met het team.</p>
+                </div>
+
+                <div class="step-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">3</div>
+                        <h3 class="text-xl font-semibold text-gray-800">Verzamel Gegevens</h3>
+                    </div>
+                    <p class="text-gray-600">Ga na welke factoren beïnvloedbaar zijn en verzamel relevante, betrouwbare gegevens.</p>
+                </div>
+
+                <div class="step-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">4</div>
+                        <h3 class="text-xl font-semibold text-gray-800">Interpreteer Gegevens</h3>
+                    </div>
+                    <p class="text-gray-600">Genereer aannemelijke en geloofwaardige interpretaties van de verzamelde gegevens.</p>
+                </div>
+
+                <div class="step-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">5</div>
+                        <h3 class="text-xl font-semibold text-gray-800">Bepaal Interventies</h3>
+                    </div>
+                    <p class="text-gray-600">Beslis welke oorzaak relevant is en bepaal samen met stakeholders gewenste resultaten en interventies.</p>
+                </div>
+
+                <div class="step-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">6</div>
+                        <h3 class="text-xl font-semibold text-gray-800">Implementeer</h3>
+                    </div>
+                    <p class="text-gray-600">Implementeer de gekozen interventies in het onderwijs.</p>
+                </div>
+
+                <div class="step-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-4">7</div>
+                        <h3 class="text-xl font-semibold text-gray-800">Evalueer</h3>
+                    </div>
+                    <p class="text-gray-600">Evalueer samen met stakeholders of gewenste resultaten zijn behaald. Zo nee, herhaal het stappenplan.</p>
+                </div>
+            </div>
+
+            <!-- Design Criteria and Conditions -->
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div class="bg-indigo-50 p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-indigo-800">
+                        <i class="fas fa-drafting-compass mr-3"></i>Ontwerpcriteria
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Houd rekening met complexe realiteit - zoek meerdere verklaringen</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Gebruik verschillende databronnen en triangulatie</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Schakel expertise in waar nodig</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-indigo-600 mr-3 mt-1"></i>
+                            <span class="text-gray-700">Betrek verschillende stakeholders</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-orange-50 p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-orange-800">
+                        <i class="fas fa-exclamation-triangle mr-3"></i>Randvoorwaarden
+                    </h3>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-orange-700 mb-2">Data:</h4>
+                        <ul class="text-sm space-y-1 text-gray-700">
+                            <li>• Inhoudelijk correct, consistent en volledig</li>
+                            <li>• Tijdig aanwezig en toegankelijk</li>
+                            <li>• Duidelijke databronnen</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-orange-700 mb-2">Onderwijsteam:</h4>
+                        <ul class="text-sm space-y-1 text-gray-700">
+                            <li>• Kennis voor data-analyse</li>
+                            <li>• Gespreksvaardigheid met stakeholders</li>
+                            <li>• Meetbare effectiviteit</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-orange-700 mb-2">Ondersteuning:</h4>
+                        <ul class="text-sm space-y-1 text-gray-700">
+                            <li>• Relevante data-aanlevering</li>
+                            <li>• Centrale opslag en presentatie</li>
+                            <li>• Kwalitatieve data meenemen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section id="cases" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+                <i class="fas fa-file-alt text-amber-600 mr-3"></i>Praktijkcasussen
+            </h2>
+
+            <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Case 1: Startersresultaat -->
+                <div class="case-study p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-amber-800">
+                        <i class="fas fa-rocket mr-3"></i>Casus 1: Startersresultaat
+                    </h3>
+                    
+                    <div class="bg-white p-4 rounded-lg mb-6">
+                        <h4 class="font-semibold text-gray-800 mb-2">Definitie:</h4>
+                        <p class="text-sm text-gray-600">Het aandeel nieuwe instromers dat een jaar later nog studeert aan de instelling of gediplomeerd is.</p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-amber-700 mb-3">CIMO-Model Toepassing:</h4>
+                        <div class="space-y-3">
+                            <div class="bg-blue-100 p-3 rounded">
+                                <strong class="text-blue-800">Context:</strong>
+                                <p class="text-sm text-blue-700">Opleiding Financiële dienstverlener niveau 3 - Startersresultaat 75% (onder norm van 82%)</p>
+                            </div>
+                            <div class="bg-green-100 p-3 rounded">
+                                <strong class="text-green-800">Interventie:</strong>
+                                <p class="text-sm text-green-700">Teamgesprek over mogelijke oorzaken en hypothesen formuleren</p>
+                            </div>
+                            <div class="bg-purple-100 p-3 rounded">
+                                <strong class="text-purple-800">Mechanismen:</strong>
+                                <p class="text-sm text-purple-700">Data-analyse van multiproblematiek, curriculum-aansluiting, en studiekeuze</p>
+                            </div>
+                            <div class="bg-orange-100 p-3 rounded">
+                                <strong class="text-orange-800">Outcomes:</strong>
+                                <p class="text-sm text-orange-700">Kort-cyclische (verzuimgesprekken, SLB) en lange termijn interventies (voorlichting, curriculum)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-2">Mogelijke Hypothesen:</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>1. Toename studenten met multiproblematiek</li>
+                            <li>2. Onderwijs sluit niet aan op studentenpopulatie</li>
+                            <li>3. Verkeerde studiekeuze van studenten</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Case 2: Jaarresultaat -->
+                <div class="case-study p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-amber-800">
+                        <i class="fas fa-graduation-cap mr-3"></i>Casus 2: Jaarresultaat
+                    </h3>
+                    
+                    <div class="bg-white p-4 rounded-lg mb-6">
+                        <h4 class="font-semibold text-gray-800 mb-2">Definitie:</h4>
+                        <p class="text-sm text-gray-600">Percentage gediplomeerden t.o.v. alle uitstroom (met/zonder diploma).</p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-amber-700 mb-3">Veel Gestelde Vragen:</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="bg-white p-2 rounded">
+                                <strong>Q:</strong> Hoe werkt doorstroom zonder diploma?
+                                <br><strong>A:</strong> Telt niet mee, maar diplomeren op niveau 2 eerst is verstandiger
+                            </div>
+                            <div class="bg-white p-2 rounded">
+                                <strong>Q:</strong> Invloed toelatingsrecht niveau 2?
+                                <br><strong>A:</strong> Goede registratie van intake en onderzoek nodig
+                            </div>
+                            <div class="bg-white p-2 rounded">
+                                <strong>Q:</strong> Jaarresultaat 0% of 100%?
+                                <br><strong>A:</strong> Wordt niet meegenomen in berekeningen
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-2">Succesfactoren:</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• Cyclisch werken en reflectieve dialoog</li>
+                            <li>• SMART-doelstellingen formuleren</li>
+                            <li>• Transfer van werkende principes</li>
+                            <li>• Samenwerking met ondersteunende diensten</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Chart of Results Comparison -->
+            <div class="mt-12 max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-6 text-center text-gray-800">
+                    <i class="fas fa-chart-bar mr-3"></i>Voorbeeld Jaarresultaat Ontwikkeling
+                </h3>
+                <div style="height: 400px;">
+                    <canvas id="resultsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Assistant -->
+    <section id="assistant" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">
+                <i class="fas fa-robot text-blue-600 mr-3"></i>AI Assistent voor Vragen
+            </h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg mb-8">
+                    <h3 class="text-lg font-semibold mb-4 text-blue-800">
+                        <i class="fas fa-question-circle mr-2"></i>Veelgestelde Vragen
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <button onclick="askQuestion('Wat is het verschil tussen Startersresultaat en Jaarresultaat?')" 
+                                class="text-left p-3 bg-white rounded-lg shadow hover:shadow-md transition-shadow text-sm text-gray-700 hover:text-blue-600">
+                            Verschil Startersresultaat vs Jaarresultaat?
+                        </button>
+                        <button onclick="askQuestion('Hoe pas ik het 7-stappenplan toe in mijn team?')" 
+                                class="text-left p-3 bg-white rounded-lg shadow hover:shadow-md transition-shadow text-sm text-gray-700 hover:text-blue-600">
+                            Hoe pas ik het stappenplan toe?
+                        </button>
+                        <button onclick="askQuestion('Welke data heb ik nodig voor een hypothese over uitval?')" 
+                                class="text-left p-3 bg-white rounded-lg shadow hover:shadow-md transition-shadow text-sm text-gray-700 hover:text-blue-600">
+                            Welke data voor uitval-hypothese?
+                        </button>
+                        <button onclick="askQuestion('Wat zijn de belangrijkste randvoorwaarden voor datagebruik?')" 
+                                class="text-left p-3 bg-white rounded-lg shadow hover:shadow-md transition-shadow text-sm text-gray-700 hover:text-blue-600">
+                            Belangrijkste randvoorwaarden?
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <div id="chatContainer" class="space-y-4 mb-6 min-h-48 max-h-96 overflow-y-auto">
+                        <div class="chat-message chat-ai p-4 rounded-lg">
+                            <div class="flex items-start">
+                                <i class="fas fa-robot text-blue-600 mr-3 mt-1"></i>
+                                <div>
+                                    <p>Hallo! Ik ben je AI-assistent voor vragen over de handreiking 'Efficiënt Datagebruik'. Je kunt me alles vragen over het stappenplan, de methodiek, casussen, of praktische toepassing. Waar kan ik je mee helpen?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex">
+                        <input type="text" id="userInput" placeholder="Stel je vraag over datagebruik in het MBO..." 
+                               class="flex-1 p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:border-blue-500"
+                               onkeypress="if(event.key==='Enter') sendMessage()">
+                        <button onclick="sendMessage()" 
+                                class="bg-blue-600 text-white px-6 py-3 rounded-r-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-2xl font-bold mb-4">Stichting Kwaliteitsnetwerk MBO</h3>
+            <p class="text-gray-300 mb-6">Ondersteuning voor datagedreven onderwijsverbetering</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <a href="#" class="text-gray-300 hover:text-white"><i class="fas fa-book mr-2"></i>Verdiepende Links</a>
+                <a href="#" class="text-gray-300 hover:text-white"><i class="fas fa-list mr-2"></i>Afkortingen</a>
+                <a href="#" class="text-gray-300 hover:text-white"><i class="fas fa-bookmark mr-2"></i>Literatuur</a>
+            </div>
+            <div class="mt-8 text-sm text-gray-400">
+                <p>Deze interactieve infographic is gebaseerd op de handreiking 'Efficiënt datagebruik - Interpreteren en benutten van data door onderwijsteams'</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart initialization
+        const ctx = document.getElementById('resultsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2015', '2016', '2017', '2018', '2019', '2020'],
+                datasets: [{
+                    label: 'Instelling X',
+                    data: [79.2, 81.1, 79.2, 78.6, 77.8, 76.5],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    tension: 0.1
+                }, {
+                    label: 'Sector Gemiddeld',
+                    data: [73.0, 74.9, 72.5, 70.3, 69.8, 68.9],
+                    borderColor: '#ef4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    tension: 0.1
+                }, {
+                    label: 'Streefnorm',
+                    data: [82, 82, 82, 82, 82, 82],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    borderDash: [5, 5],
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 60,
+                        max: 85,
+                        title: {
+                            display: true,
+                            text: 'Jaarresultaat (%)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Jaar'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Ontwikkeling Jaarresultaat over Tijd'
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                }
+            }
+        });
+
+        // AI Assistant functionality
+        const knowledgeBase = {
+            "startersresultaat": {
+                keywords: ["startersresultaat", "starter", "nieuwe instromers", "eerstejaars"],
+                response: "Het Startersresultaat is het aandeel nieuwe instromers dat een jaar later nog studeert aan de instelling of gediplomeerd is. Het verschilt van het Jaarresultaat doordat alleen nieuwe studenten worden meegenomen - zittenblijvers en switchers niet. De norm voor niveau 3 is bijvoorbeeld 82%. Het is beschikbaar in februari omdat DUO tijd nodig heeft om data te combineren uit BRON, CREBO en BRIN."
+            },
+            "jaarresultaat": {
+                keywords: ["jaarresultaat", "jaar resultaat", "gediplomeerd", "diploma", "uitstroom"],
+                response: "Het Jaarresultaat drukt het percentage gediplomeerde studenten uit ten opzichte van alle instellingsverlaters en gediplomeerde doorstromers. Het is een belangrijke indicator voor het succes van een opleiding. Bij doorstroom zonder diploma op hetzelfde niveau telt dit niet mee, maar het is verstandiger om eerst te laten diplomeren op het lagere niveau."
+            },
+            "stappenplan": {
+                keywords: ["stappenplan", "7 stappen", "methodiek", "proces", "stap"],
+                response: "Het 7-stappenplan voor datagebruik: 1) Bepaal de aanleiding (operationeel/verantwoorden/verbeteren), 2) Organiseer teamgesprek over beïnvloedbare factoren, 3) Verzamel relevante gegevens, 4) Interpreteer gegevens, 5) Bepaal interventies, 6) Implementeer interventies, 7) Evalueer resultaten. Als de gewenste resultaten niet behaald zijn, herhaal je het proces."
+            },
+            "randvoorwaarden": {
+                keywords: ["randvoorwaarden", "voorwaarden", "eisen", "criteria"],
+                response: "Belangrijke randvoorwaarden zijn: Voor data - correct, consistent, volledig, tijdig en toegankelijk. Voor het onderwijsteam - kennis voor analyse, gespreksvaardigheid met stakeholders, meetbare effectiviteit. Voor ondersteuning - relevante data-aanlevering, centrale opslag, aandacht voor kwalitatieve data."
+            },
+            "uitgangspunten": {
+                keywords: ["uitgangspunten", "principes", "7 uitgangspunten"],
+                response: "De 7 uitgangspunten: 1) Het beste voor studenten (team als spil), 2) Zichtbare onderwijsvisie, 3) Gedeelde verantwoordelijkheid docenten, 4) 'Meten is weten' - zicht op cijfers, 5) Studiesucces is meer dan cijfers, 6) Integrale aanpak met gezamenlijke visie, 7) Evidence informed oplossingen die studenten ten goede komen."
+            },
+            "interventies": {
+                keywords: ["interventies", "interventie", "maatregelen", "acties", "oplossingen"],
+                response: "Interventies kunnen kort-cyclisch zijn (verzuimgesprekken, bindend studieadvies, SLB) voor snel zichtbaar resultaat, of lange termijn (voorlichting, meeloopdagen, curriculum aanpassing). Belangrijke is om te focussen op beïnvloedbare factoren en interventies evidence informed te kiezen."
+            },
+            "hypothese": {
+                keywords: ["hypothese", "hypotheses", "veronderstelling", "aanname"],
+                response: "Voorbeelden van hypotheses bij uitval: 1) Toename multiproblematiek bij studenten, 2) Onderwijs sluit niet aan op studentenpopulatie, 3) Verkeerde studiekeuze. Voor elke hypothese verzamel je specifieke data zoals exitgesprekken, prestaties per groep, lesevaluaties om de hypothese te testen."
+            }
+        };
+
+        function findResponse(question) {
+            const lowerQuestion = question.toLowerCase();
+            
+            for (const [topic, data] of Object.entries(knowledgeBase)) {
+                if (data.keywords.some(keyword => lowerQuestion.includes(keyword))) {
+                    return data.response;
+                }
+            }
+            
+            // Default response for unmatched questions
+            return "Dat is een interessante vraag! Ik kan je helpen met vragen over het stappenplan datagebruik, de zeven uitgangspunten, randvoorwaarden, Startersresultaat, Jaarresultaat, interventies en hypotheses. Probeer je vraag anders te formuleren of gebruik een van de voorgestelde vragen hierboven.";
+        }
+
+        function askQuestion(question) {
+            document.getElementById('userInput').value = question;
+            sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const chatContainer = document.getElementById('chatContainer');
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'chat-message chat-user p-4 rounded-lg';
+            userMessage.innerHTML = `
+                <div class="flex items-start justify-end">
+                    <div class="text-right">
+                        <p>${message}</p>
+                    </div>
+                    <i class="fas fa-user text-blue-600 ml-3 mt-1"></i>
+                </div>
+            `;
+            chatContainer.appendChild(userMessage);
+            
+            // Clear input
+            input.value = '';
+            
+            // Add typing indicator
+            const typingMessage = document.createElement('div');
+            typingMessage.className = 'chat-message chat-ai p-4 rounded-lg';
+            typingMessage.id = 'typing';
+            typingMessage.innerHTML = `
+                <div class="flex items-start">
+                    <i class="fas fa-robot text-blue-600 mr-3 mt-1"></i>
+                    <div>
+                        <p><i class="fas fa-circle animate-pulse"></i> Aan het typen...</p>
+                    </div>
+                </div>
+            `;
+            chatContainer.appendChild(typingMessage);
+            
+            // Scroll to bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            // Simulate AI response delay
+            setTimeout(() => {
+                const response = findResponse(message);
+                
+                // Remove typing indicator
+                const typingEl = document.getElementById('typing');
+                if (typingEl) typingEl.remove();
+                
+                // Add AI response
+                const aiMessage = document.createElement('div');
+                aiMessage.className = 'chat-message chat-ai p-4 rounded-lg';
+                aiMessage.innerHTML = `
+                    <div class="flex items-start">
+                        <i class="fas fa-robot text-blue-600 mr-3 mt-1"></i>
+                        <div>
+                            <p>${response}</p>
+                        </div>
+                    </div>
+                `;
+                chatContainer.appendChild(aiMessage);
+                
+                // Scroll to bottom
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1500);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Show/hide floating navigation based on scroll
+        window.addEventListener('scroll', function() {
+            const floatingNav = document.querySelector('.floating-nav');
+            if (window.scrollY > 300) {
+                floatingNav.classList.remove('hidden');
+            } else {
+                floatingNav.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
