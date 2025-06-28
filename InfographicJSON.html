@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficiënt Datagebruik Infographic</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #005A9E; /* Donkerblauw */
+            --secondary-color: #FFC72C; /* Geel */
+            --accent-color: #E31C3D; /* Rood accent */
+            --background-color: #f4f7fc;
+            --text-color: #333;
+            --light-gray: #e9ecef;
+            --white: #ffffff;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .main-container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .infographic-container, .chat-container {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            padding: 25px 30px;
+            transition: all 0.3s ease;
+        }
+
+        .infographic-container {
+            flex: 3;
+            overflow: hidden;
+        }
+
+        .infographic-header h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+        
+        .infographic-header p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        .info-section {
+            margin-bottom: 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            transition: background-color 0.2s ease;
+        }
+
+        .section-header:hover {
+            background-color: #e2e6ea;
+        }
+        
+        .section-header::after {
+            content: '+';
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .info-section.active .section-header::after {
+            transform: rotate(45deg);
+        }
+
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease;
+            padding: 0 20px;
+            background-color: var(--white);
+        }
+
+        .info-section.active .section-content {
+            max-height: 1000px; /* Large enough for content */
+            padding: 20px;
+        }
+        
+        .section-content p, .section-content ul {
+            white-space: pre-wrap; /* Respects newlines from JSON */
+        }
+        .section-content ul {
+            padding-left: 20px;
+        }
+        .section-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Chat Container */
+        .chat-container {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            max-height: 85vh;
+        }
+
+        .chat-header {
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        .chat-header h2 {
+            color: var(--primary-color);
+        }
+        .chat-header p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background-color: var(--primary-color);
+            color: var(--white);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .ai-message {
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .ai-message strong {
+            color: var(--primary-color);
+        }
+        .ai-message.thinking {
+            font-style: italic;
+            color: #888;
+        }
+
+
+        #chat-form {
+            display: flex;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-gray);
+            gap: 10px;
+        }
+
+        #chat-input {
+            flex-grow: 1;
+            border: 1px solid var(--light-gray);
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        #chat-submit {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+        #chat-submit:hover {
+            background-color: #00487c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .chat-container {
+                max-height: 60vh;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="infographic-container">
+            <header class="infographic-header">
+                <h1 id="infographic-title"></h1>
+                <p id="infographic-intro"></p>
+            </header>
+            <div id="infographic-sections">
+                <!-- Sections will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>AI Assistent</h2>
+                <p>Stel een vraag over efficiënt datagebruik</p>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message ai-message">Hallo! Hoe kan ik je helpen de handreiking beter te begrijpen? Probeer een van de voorbeeldvragen!</div>
+            </div>
+            <form id="chat-form">
+                <input type="text" id="chat-input" placeholder="Typ je vraag..." autocomplete="off">
+                <button type="submit" id="chat-submit">Verstuur</button>
+            </form>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // ===================================================================
+    // PLAATS HIER JE JSON-DATA
+    // Vervang de inhoud van de 'infographicData' variabele hieronder
+    // met de JSON die is gegenereerd.
+    // ===================================================================
+    const infographicData = {
+      "infographic_title": "Efficiënt Datagebruik in het Onderwijs",
+      "infographic_introduction": "Een beknopte gids voor onderwijsteams in het mbo over het belang van datagebruik. Deze infographic biedt een stappenplan en handvatten om data (zowel kwantitatief als kwalitatief) effectief te interpreteren en te benutten voor het realiseren van onderwijsverbeteringen en het verhogen van studiesucces.",
+      "sections": [
+        {
+          "section_title": "Stappenplan Datagebruik",
+          "section_content": "Een cyclisch proces in zeven stappen om als onderwijsteam gestructureerd met data aan de slag te gaan. Het doel is om van data naar inzicht en van inzicht naar gerichte, onderbouwde interventies te komen.\n1. **Bepaal de aanleiding:** Waarom wil je data gebruiken? (Verantwoorden, verbeteren, operationeel sturen)\n2. **Organiseer een teamgesprek:** Identificeer de factoren die het team kan beïnvloeden.\n3. **Verzamel relevante en betrouwbare gegevens:** Verzamel data om te toetsen of de geïdentificeerde factoren invloed hebben.\n4. **Genereer interpretaties:** Analyseer de gegevens en formuleer geloofwaardige interpretaties. Welke factoren zijn beïnvloedbaar en hoe?\n5. **Beslis welke oorzaak relevant en urgent is:** Bepaal samen met stakeholders (studenten, werkveld) het gewenste resultaat en de meest geschikte interventies.\n6. **Implementeer de interventies:** Voer de gekozen verbeteracties door in het onderwijs.\n7. **Evalueer de interventies:** Ga na of de gewenste resultaten zijn behaald en beslis over brede uitrol of bijsturing."
+        },
+        {
+          "section_title": "Ontwerpcriteria",
+          "section_content": "Belangrijke overwegingen om te komen tot effectieve, datagedreven interventies:\n- **Complexe realiteit:** Erken dat er vaak meerdere verklaringen en oplossingen zijn voor een probleem.\n- **Expertise:** Zorg voor voldoende expertise binnen het team of schakel ondersteunende diensten in.\n- **Integraal perspectief:** Gebruik verschillende databronnen (triangulatie) voor een volledig beeld.\n- **Invloedssfeer:** Ga na in welke mate je als team daadwerkelijk invloed kunt uitoefenen op het probleem.\n- **Aansluiting bij praktijk:** Zorg dat de data-inzet aansluit bij de bestaande onderwijssituatie.\n- **Samen duiden:** Geef samen met stakeholders (studenten, leerbedrijven) betekenis aan de data; dit geeft inzicht in 'het verhaal achter de cijfers'."
+        },
+        {
+          "section_title": "Randvoorwaarden",
+          "section_content": "De voorwaarden die nodig zijn om succesvol met data te kunnen werken:\n- **Data Kwaliteit:** Data moeten inhoudelijk correct, consistent, volledig, tijdig en eenvoudig toegankelijk zijn. De gebruikte databron moet duidelijk zijn.\n- **Team Competenties:** Het onderwijsteam moet de kennis hebben om data te analyseren en te duiden. Daarnaast zijn competenties nodig om het gesprek met stakeholders te voeren.\n- **Ondersteuning:** De ondersteunende diensten leveren de juiste data, helpen bij de analyse en presentatie, en denken mee over de weging van kwantitatieve en kwalitatieve data."
+        },
+        {
+          "section_title": "Casuïstiek: Voorbeelden uit de Praktijk",
+          "section_content": "De handreiking bevat uitgewerkte praktijkvoorbeelden om de methodiek te illustreren. Deze casussen laten zien hoe een team het stappenplan kan doorlopen voor specifieke indicatoren.\n- **Casus 1: Startersresultaat:** Focust op het succes van nieuwe instromers in het eerste jaar. De casus doorloopt hoe je hypotheses kunt opstellen (bijv. over multiproblematiek of verkeerde studiekeuze), welke data je verzamelt en welke interventies je kunt overwegen.\n- **Casus 2: Jaarresultaat:** Analyseert het percentage gediplomeerde studenten ten opzichte van alle uitstromers. Deze casus gebruikt het CIMO-model (Context, Intervention, Mechanism, Outcome) om diepgaand te kijken naar teamkenmerken, stakeholder-relaties en de weg van data-analyse naar een gedragen verbeteractie."
+        }
+      ],
+      "ai_assistant_prompt": "Je bent een deskundige AI-assistent, gespecialiseerd in de handreiking 'Efficiënt datagebruik' van Stichting Kwaliteitsnetwerk mbo. Jouw doel is om onderwijsteams in het mbo te helpen met het begrijpen en toepassen van de methodiek voor datagebruik. Je beantwoordt vragen op basis van de 38 pagina's van dit document. Je kunt het stappenplan uitleggen, de ontwerpcriteria en randvoorwaarden toelichten, en details geven over de casussen 'Startersresultaat' en 'Jaarresultaat'. Je bent bekend met termen als VSV, CIMO-model, JOB-monitor, DUO en de specifieke context van het Nederlandse mbo-onderwijs. Je antwoorden zijn praktisch, helder en gericht op het ondersteunen van de gebruiker in zijn of haar onderwijspraktijk.",
+      "example_questions": [
+        "Wat zijn de zeven stappen van het Stappenplan Datagebruik?",
+        "Hoe kan ik als onderwijsteam het beste een teamgesprek over data organiseren?",
+        "Wat is het verschil tussen het Startersresultaat en het Jaarresultaat?",
+        "Kun je een voorbeeld geven van een interventie om het Startersresultaat te verbeteren?",
+        "Aan welke randvoorwaarden moet de data voldoen voordat we ermee aan de slag gaan?",
+        "Wat wordt bedoeld met 'het verhaal achter de cijfers'?",
+        "Hoe kan ik data gebruiken om het onderwijs binnen mijn team te verbeteren?",
+        "Welke rol spelen stakeholders zoals studenten en het werkveld in dit proces?"
+      ],
+      "keywords": [
+        "Datagebruik", "Onderwijsverbetering", "MBO", "Stappenplan", "Ontwerpcriteria", "Randvoorwaarden", "Casus", "Startersresultaat", "Jaarresultaat", "CIMO-model", "Data-analyse", "Interventies", "Studiesucces", "Kwaliteitsnetwerk"
+      ]
+    };
+    // ===================================================================
+    // EINDE JSON-DATA SECTIE
+    // ===================================================================
+
+
+    // --- INFOGRAPHIC LOGIC ---
+    function renderInfographic() {
+        document.getElementById('infographic-title').textContent = infographicData.infographic_title;
+        document.getElementById('infographic-intro').textContent = infographicData.infographic_introduction;
+        
+        const sectionsContainer = document.getElementById('infographic-sections');
+        sectionsContainer.innerHTML = ''; // Clear existing
+        
+        infographicData.sections.forEach(section => {
+            const sectionEl = document.createElement('div');
+            sectionEl.className = 'info-section';
+            
+            const headerEl = document.createElement('div');
+            headerEl.className = 'section-header';
+            headerEl.textContent = section.section_title;
+            
+            const contentEl = document.createElement('div');
+            contentEl.className = 'section-content';
+            contentEl.innerHTML = `<p>${markdownToHtml(section.section_content)}</p>`;
+            
+            sectionEl.appendChild(headerEl);
+            sectionEl.appendChild(contentEl);
+            sectionsContainer.appendChild(sectionEl);
+
+            headerEl.addEventListener('click', () => {
+                sectionEl.classList.toggle('active');
+            });
+        });
+    }
+
+    // --- CHATBOT LOGIC ---
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatMessages = document.getElementById('chat-messages');
+
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const userMessage = chatInput.value.trim();
+        if (!userMessage) return;
+
+        displayMessage(userMessage, 'user');
+        chatInput.value = '';
+
+        setTimeout(() => {
+            const aiResponse = getAIResponse(userMessage);
+            displayMessage(aiResponse, 'ai');
+        }, 800 + Math.random() * 500); // Simulate thinking
+    });
+
+    function displayMessage(message, sender) {
+        const messageEl = document.createElement('div');
+        messageEl.classList.add('message', `${sender}-message`);
+        messageEl.innerHTML = markdownToHtml(message);
+        chatMessages.appendChild(messageEl);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function getAIResponse(query) {
+        const q = query.toLowerCase();
+        let bestMatch = { score: 0, content: "Helaas, ik kon geen direct antwoord op die vraag vinden in de handreiking. Probeer je vraag anders te formuleren of stel een vraag over het stappenplan, de criteria of de casussen." };
+
+        // Check for greetings
+        if (q.includes('hallo') || q.includes('hoi')) {
+            return "Hallo! Waar kan ik je vandaag mee helpen?";
+        }
+
+        // Scoring mechanism
+        infographicData.sections.forEach(section => {
+            let score = 0;
+            const title = section.section_title.toLowerCase();
+            const content = section.section_content.toLowerCase();
+
+            // High score for title match
+            if (q.includes(title)) {
+                score += 5;
+            }
+
+            // Score for keyword matches in query
+            const queryWords = q.split(' ');
+            queryWords.forEach(word => {
+                if (word.length > 3) {
+                    if (title.includes(word)) score += 2;
+                    if (content.includes(word)) score += 1;
+                }
+            });
+            
+            infographicData.keywords.forEach(kw => {
+                if(q.includes(kw.toLowerCase())){
+                    if(title.includes(kw.toLowerCase()) || content.includes(kw.toLowerCase())){
+                        score += 3;
+                    }
+                }
+            });
+
+
+            if (score > bestMatch.score) {
+                bestMatch = { score: score, content: `Hier is informatie over **${section.section_title}**:\n\n${section.section_content}` };
+            }
+        });
+        
+        // Check example questions for a perfect match boost
+        infographicData.example_questions.forEach(exQ => {
+            if (q.includes(exQ.toLowerCase().substring(0, 20))) { // Match first 20 chars
+                // Find the relevant section again, could be more robust
+                if(exQ.toLowerCase().includes("stappen")){
+                    bestMatch = { score: 100, content: `Hier is informatie over **Stappenplan Datagebruik**:\n\n${infographicData.sections[0].section_content}` };
+                }
+            }
+        });
+
+        return bestMatch.content;
+    }
+    
+    // Simple markdown to HTML for bolding and lists
+    function markdownToHtml(text) {
+        return text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+            .replace(/^- (.*$)/gm, '<li>$1</li>') // List items
+            .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>'); // Wrap lists
+    }
+
+
+    // --- INITIALIZE ---
+    renderInfographic();
+
+});
+</script>
+
+</body>
+</html>
