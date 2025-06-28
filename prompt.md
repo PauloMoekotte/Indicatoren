@@ -1,0 +1,1 @@
+Maak een Nederlandstalige interactieve, html-based infotgraphic op basis van deze handreiking. Gebruik AI-functies en een AI-assistent die vragen over het boek kan beantwoorden. Voorzie de AI-assistent van voorbeeldvragen en trefwoorden. Gebruik zoveel mogelijk dezelfde layout en kleurstelling.
