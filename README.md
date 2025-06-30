@@ -7,7 +7,7 @@
 # Indicatoren
 [Indicatoren selectie canvas](https://paulomoekotte.github.io/Indicatoren/ModelSelectieCanvas.html)
 
-[Indicatoren selectie MBO canvas](https://paulomoekotte.github.io/Indicatoren/ModelSelectieMBOCanvas.html)
+[Indicatoren selectie MBO canvas](https://paulomoekotte.github.io/Indicatoren/ModelSelectieCanvas.html)
 
 [Indicatoren selectie MBO canvas 2](https://paulomoekotte.github.io/Indicatoren/ModelSelectieMBOCanvas-2.html)
 
